@@ -1,64 +1,80 @@
 {
   "n": 80,
-  "fraction_in_window_lee_ambient_D": 0.5875,
-  "fraction_in_window_stokes_einstein_D": 0.65,
+  "fraction_in_window_lee_ambient_D": 0.625,
+  "fraction_in_window_stokes_einstein_D": 0.675,
   "examples": [
     {
       "mode": "lee_ambient",
       "d_um": 70.0,
-      "t_min": 53.603637121723224,
+      "t_trigger_arrival_min": 26.33270638512314,
+      "t_post_trigger_particle_min": 20.437283929161655,
+      "t_total_after_initial_pumping_min": 46.7699903142848,
       "pathway": "PLAUSIBLE_CANDIDATE",
       "regime": "activation_or_reaction_limited"
     },
     {
       "mode": "stokes_einstein",
       "d_um": 70.0,
-      "t_min": 53.5119462468037,
+      "t_trigger_arrival_min": 26.33270638512314,
+      "t_post_trigger_particle_min": 20.345593054242133,
+      "t_total_after_initial_pumping_min": 46.67829943936527,
       "pathway": "PLAUSIBLE_WITH_EXTRAPOLATED_D",
       "regime": "activation_or_reaction_limited"
     },
     {
       "mode": "lee_ambient",
       "d_um": 270.0,
-      "t_min": 63.94078953956277,
+      "t_trigger_arrival_min": 45.66838211942118,
+      "t_post_trigger_particle_min": 21.106598479852185,
+      "t_total_after_initial_pumping_min": 66.77498059927338,
       "pathway": "PLAUSIBLE_CANDIDATE",
       "regime": "activation_or_reaction_limited"
     },
     {
       "mode": "stokes_einstein",
       "d_um": 270.0,
-      "t_min": 63.25872170470222,
+      "t_trigger_arrival_min": 45.66838211942118,
+      "t_post_trigger_particle_min": 20.424530644991634,
+      "t_total_after_initial_pumping_min": 66.09291276441282,
       "pathway": "PLAUSIBLE_WITH_EXTRAPOLATED_D",
       "regime": "activation_or_reaction_limited"
     },
     {
       "mode": "lee_ambient",
       "d_um": 500.0,
-      "t_min": 49.480344141575365,
+      "t_trigger_arrival_min": 7.6868179605327525,
+      "t_post_trigger_particle_min": 25.636935161308983,
+      "t_total_after_initial_pumping_min": 33.32375312184173,
       "pathway": "PLAUSIBLE_CANDIDATE",
       "regime": "mixed"
     },
     {
       "mode": "stokes_einstein",
       "d_um": 500.0,
-      "t_min": 44.80223827833427,
-      "pathway": "PLAUSIBLE_WITH_EXTRAPOLATED_D",
-      "regime": "activation_or_reaction_limited"
-    },
-    {
-      "mode": "stokes_einstein",
-      "d_um": 270.0,
-      "t_min": 74.89414697711636,
+      "t_trigger_arrival_min": 7.6868179605327525,
+      "t_post_trigger_particle_min": 20.958829298067894,
+      "t_total_after_initial_pumping_min": 28.645647258600647,
       "pathway": "PLAUSIBLE_WITH_EXTRAPOLATED_D",
       "regime": "activation_or_reaction_limited"
     },
     {
       "mode": "lee_ambient",
-      "d_um": 300.0,
-      "t_min": 73.59214505619614,
+      "d_um": 100.0,
+      "t_trigger_arrival_min": 21.271558087792105,
+      "t_post_trigger_particle_min": 21.040480243730087,
+      "t_total_after_initial_pumping_min": 42.31203833152219,
       "pathway": "PLAUSIBLE_CANDIDATE",
+      "regime": "activation_or_reaction_limited"
+    },
+    {
+      "mode": "stokes_einstein",
+      "d_um": 100.0,
+      "t_trigger_arrival_min": 21.271558087792105,
+      "t_post_trigger_particle_min": 20.416732795297943,
+      "t_total_after_initial_pumping_min": 41.68829088309005,
+      "pathway": "PLAUSIBLE_WITH_EXTRAPOLATED_D",
       "regime": "activation_or_reaction_limited"
     }
   ],
-  "verdict": "PLAUSIBLE_PATHWAY if delayed activator contact is engineered; 150 C window is modelled not measured; status UNKNOWN not PASS."
+  "verdict": "PLAUSIBLE_PATHWAY if Stage-B activator chase is sequenced after Stage-A placement; 150 C window is modelled not measured; status UNKNOWN not PASS. t_trigger_arrival is operational, not intrinsic kinetics."
 }

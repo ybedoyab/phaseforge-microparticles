@@ -9,7 +9,7 @@ R06_controlled_activation,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Chemical gate anal
 R06_controlled_activation,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Acid gate analogue; exploratory
 R07_transformation_window,PhaseForge-RuP,FAIL,FAIL,t_solid ~1.6 min at 150 C
 R07_transformation_window,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,No 25-75 min isothermal at 150 C
-R07_transformation_window,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Modelled plausible with delayed contact; not PASS
+R07_transformation_window,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Modelled plausible two-stage envelope; not PASS
 R07_transformation_window,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Unmeasured at 150 C
 R08_discrete_particles,PhaseForge-RuP,MARGINAL,FAIL,Hypothesis; agglomeration unvalidated
 R08_discrete_particles,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,"Same droplet architecture, unvalidated"
@@ -37,5 +37,5 @@ R16_flow_through_around,PhaseForge-ChemGate,MARGINAL,UNKNOWN,k_rel vs assumed k_
 R16_flow_through_around,PhaseForge-ChemGate-Acid,MARGINAL,UNKNOWN,k_rel vs assumed k_open
 R17_no_bulk_gel,PhaseForge-RuP,FAIL,FAIL,"If 150 C cure is seconds, isolation may fail"
 R17_no_bulk_gel,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,Latent during transport analogue
-R17_no_bulk_gel,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Requires delayed activator; otherwise small drops cure too fast
+R17_no_bulk_gel,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Requires Stage-B chase; Stage A must not contain available activator
 R17_no_bulk_gel,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Requires delayed acid contact

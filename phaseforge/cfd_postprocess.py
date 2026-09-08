@@ -252,7 +252,8 @@ def extract_case(case: Path, tag: str) -> list[dict]:
                     "mean_U_m_s": Umag,
                     "pressure_drop_Pa": dp,
                     "t_diff_min": sph.t_avg_50_s / 60.0,
-                    "t_transform_min": cg.t_transform_min,
+                    "t_post_trigger_particle_min": cg.t_post_trigger_particle_min,
+                    "t_transform_min": cg.t_from_pumping_min,
                     "chemgate_pathway": cg.pathway,
                     "provenance": PROVENANCE.value,
                 }

@@ -4,10 +4,16 @@ Scores are qualitative (L/M/H). This is an engineering risk register, not a HSE 
 
 | ID | Risk | Probability | Impact | Detectability | Mitigation (concept) | Validation method | Residual |
 |---|---|---|---|---|---|---|---|
-| RK01 | Premature polymerization during pumping | H at 150 °C with published Ru/phosphite; **lower** if ChemGate activator is withheld | H (screen-out / tubing set) | M (rheology) | ChemGate delayed contact; do not put activator in transport brine; do not retune RuP to fake PASS | Isothermal t_gel of dispersed system with/without activator | H for RuP at 150 °C; M for ChemGate if gate holds |
+| RK01 | Premature polymerization during pumping | H at 150 °C with published Ru/phosphite; **lower** if ChemGate Stage A withholds activator | H (screen-out / tubing set) | M (rheology) | Two-stage ChemGate; do not put available activator in Stage A; do not retune RuP to fake PASS | Isothermal t_gel of dispersed system with/without Stage B chase | H for RuP at 150 °C; M for ChemGate if gate holds |
 | RK14 | IP overlap US11377580B2 | H | H (commercial) | H | Differentiate microparticle isolation vs pillars; get counsel | Landscape + counsel | H |
 | RK16 | IP overlap D899/Cu (US12338310 and related) | H if recipe copied | H | H | Use architecture only; licensed/unencumbered pair | Counsel | H |
-| RK17 | ChemGate premature cure if activator present during transport | H for 70 μm drops (t_diff minutes) | H | M | External delay / staged activator | Diffusion + jar tests | M–H |
+| RK17 | ChemGate premature cure if activator present during Stage A transport | H for 70 μm drops if gate leaks | H | M | Two-stage: withhold available activator until Stage B chase | Diffusion + jar tests with/without chase | M–H |
+| RK18 | Activator-front dispersion in Stage B | M (wellbore mixing) | M (timing smear ±5–15 min assumed) | L downhole | Spacer; sufficient chase volume; do not treat arrival as a delta function | Tracer / concentration front analogue | M |
+| RK19 | Early Stage A / Stage B mixing | M at the fluid interface | H (local early activation) | M | Aqueous spacer; sequenced batches; avoid overflush of A into B at surface | Interface sampling in a flow loop | M–H |
+| RK20 | Late trigger arrival | M if placement takes >~40 min at 600 μm | H (total from pumping can exceed 75 min) | M | Design envelope: 270 μm allowable arrival ≈0–46 min; do not lock 30 min | Pump schedule + modelled t_post | M |
+| RK21 | Nonuniform activator access | M in heterogeneous placement | H (mixed cured/uncured drops) | L | Excess chase; avoid relying on a single contact time | Spatial sampling of conversion | H |
+| RK22 | Bypass around some droplets | M (preferential aqueous paths) | H (uncured pockets) | L | Placement quality; not proven by 0.08 s CFD | Core flood / slot | H |
+| RK23 | Uneven activation across the target | M (RK18–RK22 combined) | H (strength and size scatter) | L | Treat t_trigger_arrival as a distribution, not a point | Envelope + lab PSD/conversion map | H |
 | RK02 | Too-slow activation | M at low T / high inhibitor | M (particles never form) | H | Reduce inhibitor / raise catalyst activity | Same rheology map | M |
 | RK03 | Bulk gel / continuous plug | M if coalescence during sticky window | H (challenge FAIL) | H (visual) | Keep φ moderate; stabilize interface; avoid gel while drops are in contact | Jar tests + slot flow | M |
 | RK04 | Droplet coalescence | M at low σ, high φ, low shear after pumping | H (size >600 μm, adhesion) | M | IFT 3–5 mN/m analogue; sufficient stabilizer | Emulsion stability + size vs time | M |
@@ -29,3 +35,4 @@ Scores are qualitative (L/M/H). This is an engineering risk register, not a HSE 
 2. **150 °C mechanical strength vs Tg** (RK06)
 3. **IP overlap** (RK14)
 4. **Water/brine catalyst compatibility in droplets** (RK09)
+5. **Stage-B trigger-front variance** (RK18–RK23): assumed ±5–15 min smear; late arrival can push 600 μm totals past 75 min; bypass leaves uncured droplets. Operational clock, not a reason to invent a PASS.

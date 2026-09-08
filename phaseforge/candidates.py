@@ -97,13 +97,18 @@ def evaluate_chemgate_family() -> FamilyCard:
         overall_150C=RequirementStatus.UNKNOWN,
         transport_latency_150C=(
             "SUPPORTED analogue: D899 remains dormant through ~200 C frontal polymerization "
-            "until Cu(I) (Lee 2024). Requires delayed activator contact so droplets are not "
-            "exposed during transport."
+            "until Cu(I) (Lee 2024). Stage A placement fluid has no available activator; "
+            "Stage B aqueous chase supplies the trigger after the target is populated."
         ),
         activation_at_150C=(
-            f"MODELLED: t_transform approximately {cg.t_transform_min:.0f} min at 270 um "
-            f"with delayed contact + Lee ambient D ({cg.pathway}). "
-            "Aqueous-to-organic activation demonstrated by Lee 2025 (ambient). "
+            f"MODELLED (not intrinsic latency): at 270 um Lee ambient D, "
+            f"t_post_trigger_particle approximately {cg.t_post_trigger_particle_min:.0f} min "
+            f"(partition/diffusion/activation/cure). Default t_trigger_arrival "
+            f"{cg.t_trigger_arrival_s / 60.0:.0f} min is {cg.t_trigger_arrival_tag}, "
+            f"not kinetics. Interpretation A total approximately {cg.t_from_pumping_min:.0f} min "
+            f"({cg.pathway}). Allowable Stage-B arrival approximately "
+            f"{cg.t_arr_min_allowable_min:.0f}-{cg.t_arr_max_allowable_min:.0f} min "
+            "for 25-75 min from pumping. Lee 2025 activation is ambient. "
             "25-75 min at 150 C is NOT experimentally demonstrated."
         ),
         mechanics_150C="UNKNOWN crush; high-Tg pDCPD-family analogues exist (Zhan; TCPD patents)",

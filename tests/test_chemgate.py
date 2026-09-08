@@ -76,15 +76,15 @@ def test_chemgate_never_pass() -> None:
     assert r.status is RequirementStatus.UNKNOWN
     assert r.status is not RequirementStatus.PASS
     r2 = evaluate_chemgate(
-        ChemGateInputs(diameter_um=150.0, t_delay_s=30 * 60.0, D_mode="lee_ambient")
+        ChemGateInputs(diameter_um=150.0, t_trigger_arrival_s=30 * 60.0, D_mode="lee_ambient")
     )
-    if 25.0 <= r2.t_transform_min <= 75.0:
+    if 25.0 <= r2.t_from_pumping_min <= 75.0:
         assert r2.pathway in ("PLAUSIBLE_CANDIDATE", "PLAUSIBLE_WITH_EXTRAPOLATED_D")
     assert r2.status is RequirementStatus.UNKNOWN
 
 
 def test_missing_data_cannot_create_pass() -> None:
-    r = evaluate_chemgate(ChemGateInputs(diameter_um=600.0, t_delay_s=0.0, D_mode="arrhenius"))
+    r = evaluate_chemgate(ChemGateInputs(diameter_um=600.0, t_trigger_arrival_s=0.0, D_mode="arrhenius"))
     assert r.status is not RequirementStatus.PASS
 
 
@@ -164,3 +164,71 @@ def test_shell_and_feasibility_shapes() -> None:
     assert sh["t_D_x0.1_min"] > sh["t_const_D_min"]
     hyp = t_shell_vs_coalescence(270.0, 10.0)
     assert "Hypothesis" in hyp["notes"]
+
+
+def test_post_trigger_excludes_operational_arrival() -> None:
+    from phaseforge.chemgate import TRIGGER_ARRIVAL_TAG, allowable_trigger_arrival_min
+
+    delayed = evaluate_chemgate(
+        ChemGateInputs(diameter_um=270.0, t_trigger_arrival_s=30 * 60.0, D_mode="lee_ambient")
+    )
+    contact = evaluate_chemgate(
+        ChemGateInputs(diameter_um=270.0, t_trigger_arrival_s=0.0, D_mode="lee_ambient")
+    )
+    assert delayed.t_trigger_arrival_tag == TRIGGER_ARRIVAL_TAG
+    assert abs(delayed.t_post_trigger_particle_s - contact.t_post_trigger_particle_s) < 1e-9
+    assert abs(delayed.t_from_pumping_min - delayed.t_from_contact_min - 30.0) < 1e-6
+    assert delayed.t_post_trigger_particle_min == delayed.t_from_contact_min
+    assert delayed.t_from_pumping_min == delayed.t_total_after_initial_pumping_s / 60.0
+    # Operational arrival is not chemical latency.
+    assert delayed.t_post_trigger_particle_min < delayed.t_from_pumping_min
+    env = allowable_trigger_arrival_min(delayed.t_post_trigger_particle_min)
+    assert env["requires_arbitrary_fixed_30_min"] is False
+    if env["feasible"]:
+        lo, hi = env["t_trigger_arrival_min_allowable"], env["t_trigger_arrival_max_allowable"]
+        assert 25.0 <= lo + delayed.t_post_trigger_particle_min + 1e-9
+        assert hi + delayed.t_post_trigger_particle_min <= 75.0 + 1e-9
+        assert abs(hi - lo) > 1.0  # a window, not a single forced 30 min
+
+
+def test_trigger_envelope_is_a_range_not_a_fixed_30() -> None:
+    from phaseforge.chemgate import envelope_summary, trigger_timing_envelope_rows
+
+    rows = trigger_timing_envelope_rows(diameters_um=(270.0,), D_modes=("lee_ambient",))
+    assert any(abs(r["t_trigger_arrival_min"] - 0.0) < 1e-9 for r in rows)
+    assert any(abs(r["t_trigger_arrival_min"] - 60.0) < 1e-9 for r in rows)
+    summ = envelope_summary(diameters_um=(70.0, 270.0, 400.0))
+    assert summ["requires_arbitrary_fixed_30_min"] is False
+    nom = summ["nominal_270um"]
+    assert nom["t_post_trigger_particle_min"] > 0
+    lo, hi = nom["t_arr_min_allowable_min"], nom["t_arr_max_allowable_min"]
+    assert lo is not None and hi is not None
+    assert hi - lo >= 10.0
+    in_window = [r for r in rows if r["in_challenge_window_from_pumping"]]
+    arrivals = {r["t_trigger_arrival_min"] for r in in_window}
+    assert len(arrivals) >= 2
+
+
+def test_stage_a_activator_is_not_intrinsic_delay() -> None:
+    r = evaluate_chemgate(ChemGateInputs(diameter_um=70.0, t_trigger_arrival_s=0.0))
+    assert r.stage_a_activator_present is True
+    if r.t_post_trigger_particle_min < 25.0:
+        assert r.pathway == "NEEDS_TWO_STAGE_DEPLOYMENT"
+    assert r.status is RequirementStatus.UNKNOWN
+    assert "not material kinetics" in r.notes
+
+
+def test_notes_do_not_claim_intrinsic_62_min() -> None:
+    notes = evaluate_chemgate().notes.lower()
+    assert "intrinsically delays" not in notes
+    assert "assumed_for_deployment_scenario" in notes
+    assert "t_post_trigger_particle" in notes
+    assert "t_trigger_arrival" in notes
+
+
+def test_envelope_json_serializable() -> None:
+    import json
+
+    from phaseforge.chemgate import envelope_summary
+
+    json.dumps(envelope_summary(diameters_um=(70.0, 270.0)))

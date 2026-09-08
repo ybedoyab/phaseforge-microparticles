@@ -11,6 +11,8 @@ FORBIDDEN = [
     "we measured the PhaseForge fluid",
     "proven non-agglomeration",
     "measured PhaseForge fracture conductivity",
+    "intrinsically delays cure",
+    "chemgate intrinsically delays",
 ]
 
 

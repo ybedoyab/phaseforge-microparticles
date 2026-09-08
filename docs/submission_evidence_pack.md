@@ -16,7 +16,7 @@ Two catalyst families:
 
 1. **Ru/Grubbs + phosphite (`PhaseForge-RuP`, lower-T reference).** Moderate temperature: feasible **candidate** window. 150 °C: kinetics **FAIL** / mechanics **UNKNOWN**. Do not force a 150 °C PASS.
 2. **PhaseForge-HT-Thermal (Mo NHC).** Kordes 2024: no DCPD polymerization up to ~150 °C; thermal activation **>150 °C**. Status **UNKNOWN**.
-3. **PhaseForge-ChemGate (primary high-T).** Latent catalyst in droplets; aqueous chemical activator after placement. Lee 2024/2025 analogues. 25–75 min at 150 °C **modelled / UNKNOWN**. D899/Cu is **not our IP**.
+3. **PhaseForge-ChemGate (primary high-T).** Two-stage: Stage A latent-catalyst droplets in a low-μ aqueous carrier **without available activator**; Stage B aqueous activator chase after placement. Lee 2024/2025 analogues. Modelled post-trigger particle time **approximately 27–35 min**; operational trigger arrival is `ASSUMED_FOR_DEPLOYMENT_SCENARIO`, not kinetics. 25–75 min at 150 °C **modelled / UNKNOWN**. D899/Cu is **not our IP**.
 
 See `docs/candidate_architecture.md`.
 
@@ -70,7 +70,9 @@ Dominant drivers of t_transform: temperature, inhibitor index, catalyst activity
 
 ## Key risks
 
-Premature cure at 150 °C; Tg-limited strength; brine poisoning; coalescence; US11377580B2 overlap. See `docs/risk_register.md`.
+Premature cure at 150 °C if Stage A contains activator; Stage-B front dispersion; Tg-limited strength; brine poisoning; coalescence; US11377580B2 overlap. See `docs/risk_register.md`.
+
+Timing envelope: `results/tables/trigger_timing_envelope.csv`, figure `31_trigger_timing_envelope`. Two-stage sequence: figure `32_two_stage_deployment_sequence`.
 
 ## TRL
 

@@ -1,4 +1,4 @@
-"""Figures 17-30 for ChemGate, high-Tg analogues, and CFD coupling."""
+"""Figures 17-32 for ChemGate, high-Tg analogues, CFD coupling, and trigger timing."""
 
 from __future__ import annotations
 
@@ -22,10 +22,12 @@ from phaseforge.candidates import all_family_cards
 from phaseforge.cfd_postprocess import intended_dimensionless, write_metrics_csv
 from phaseforge.chemgate import (
     ChemGateInputs,
+    envelope_summary,
     evaluate_chemgate,
     feasibility_map,
     search_plausible_150C,
     t_shell_vs_coalescence,
+    trigger_timing_envelope_rows,
 )
 from phaseforge.high_tg import scenarios
 from phaseforge.provenance import RequirementStatus
@@ -69,10 +71,10 @@ def figure_18_chemgate_schematic(figdir: Path) -> None:
     ax.set_ylim(0, 3.2)
     ax.axis("off")
     stages = [
-        (1.0, "Aqueous carrier\n+ organic droplets\nlatent catalyst"),
-        (3.3, "HPHT transport\ncatalyst masked\nno 150 °C trigger"),
-        (5.6, "Activator access\nafter placement"),
-        (7.9, "Diffusion across\nL–L interface"),
+        (1.0, "Stage A\nlatent droplets\nNO activator"),
+        (3.3, "HPHT transport\ncatalyst masked\nno chemical trigger"),
+        (5.6, "Stage B chase\nactivator arrives"),
+        (7.9, "Partition +\ndiffusion"),
         (10.3, "Surface-to-core\nROMP → particles"),
     ]
     for x, text in stages:
@@ -148,8 +150,10 @@ def figure_22_feasibility_map(figdir: Path, tab: Path) -> None:
     ax.clabel(cs, fmt="%g min")
     ax.set_xlabel("Droplet diameter (μm)")
     ax.set_ylabel("Activator activity (relative)")
-    ax.set_title("t_transform (min) including 30 min delayed contact. Model, not 150 °C experiment.")
-    fig.colorbar(im, ax=ax, label="t_transform (min)")
+    ax.set_title(
+        "t_post_trigger_particle (min) after activator contact. No operational delay. Model, not 150 °C."
+    )
+    fig.colorbar(im, ax=ax, label="t_post_trigger_particle (min)")
     _save(fig, "22_diameter_activity_feasibility_map", figdir)
     pd.DataFrame(Z, index=acts, columns=DIAMETERS_UM).to_csv(tab / "chemgate_feasibility_map.csv")
 
@@ -213,13 +217,13 @@ def figure_26_30_cfd_and_decision(figdir: Path, tab: Path) -> None:
     for d in DIAMETERS_UM:
         r = evaluate_chemgate(ChemGateInputs(diameter_um=d, D_mode="lee_ambient"))
         tdiff.append(r.t_diff_s / 60.0)
-        ttot.append(r.t_transform_min)
+        ttot.append(r.t_post_trigger_particle_min)
     ax.plot(DIAMETERS_UM, tdiff, "o-", label="t_diff (Lee D)")
-    ax.plot(DIAMETERS_UM, ttot, "s-", label="t_transform (delay+diff+act+poly)")
-    ax.axhspan(25, 75, color="#9ecae1", alpha=0.3, label="25–75 min")
+    ax.plot(DIAMETERS_UM, ttot, "s-", label="t_post_trigger_particle (no operational delay)")
+    ax.axhspan(25, 75, color="#9ecae1", alpha=0.3, label="25–75 min (from contact)")
     ax.set_xlabel("Hydrodynamic / droplet diameter (μm)")
     ax.set_ylabel("Time (min)")
-    ax.set_title("Hydrodynamic diameter → activator delay coupling")
+    ax.set_title("Hydrodynamic diameter → post-trigger particle time (not t_trigger_arrival)")
     ax.legend()
     _save(fig, "29_hydrodynamic_diameter_to_activation_time", figdir)
 
@@ -278,6 +282,134 @@ def figure_26_30_cfd_and_decision(figdir: Path, tab: Path) -> None:
     pd.DataFrame(rows).to_csv(tab / "shell_vs_coalescence.csv", index=False)
 
 
+def figure_31_trigger_timing_envelope(figdir: Path, tab: Path) -> None:
+    rows = trigger_timing_envelope_rows()
+    df = pd.DataFrame(rows)
+    df.to_csv(tab / "trigger_timing_envelope.csv", index=False)
+    summary = envelope_summary()
+    (tab / "trigger_timing_envelope_summary.json").write_text(
+        json.dumps(summary, indent=2), encoding="utf-8"
+    )
+
+    lee = df[(df["D_mode"] == "lee_ambient") & (df["activator_activity"] == 1.0)]
+    fig, axes = plt.subplots(1, 3, figsize=(12.6, 4.2))
+
+    per = {p["diameter_um"]: p for p in summary["per_diameter"]}
+    ds = np.array(list(per.keys()), dtype=float)
+    post = np.array([per[d]["t_post_trigger_particle_min"] for d in ds])
+    lo = np.array(
+        [
+            per[d]["t_trigger_arrival_min_allowable"]
+            if per[d]["t_trigger_arrival_min_allowable"] is not None
+            else np.nan
+            for d in ds
+        ]
+    )
+    hi = np.array(
+        [
+            per[d]["t_trigger_arrival_max_allowable"]
+            if per[d]["t_trigger_arrival_max_allowable"] is not None
+            else np.nan
+            for d in ds
+        ]
+    )
+
+    axes[0].plot(ds, post, "o-", color="#1f4e79")
+    axes[0].axhspan(25, 75, color="#9ecae1", alpha=0.3, label="25–75 min from contact")
+    axes[0].set_xlabel("Droplet diameter (μm)")
+    axes[0].set_ylabel("t_post_trigger_particle (min)")
+    axes[0].set_title("B: time from activator contact")
+    axes[0].legend(fontsize=7)
+
+    axes[1].fill_between(ds, lo, hi, color="#31a354", alpha=0.35, label="allowable t_trigger_arrival")
+    axes[1].axhline(30.0, color="#d7301f", ls="--", lw=1.0, label="30 min scenario (not required)")
+    axes[1].set_xlabel("Droplet diameter (μm)")
+    axes[1].set_ylabel("Stage-B arrival (min)")
+    axes[1].set_ylim(-2, 62)
+    axes[1].set_title("Allowable activator-chase arrival")
+    axes[1].legend(fontsize=7)
+
+    nom = lee[lee["diameter_um"] == 270.0]
+    axes[2].plot(
+        nom["t_trigger_arrival_min"],
+        nom["t_total_after_initial_pumping_min"],
+        "s-",
+        color="#1f4e79",
+        label="270 μm Lee D",
+    )
+    axes[2].axhspan(25, 75, color="#9ecae1", alpha=0.3, label="25–75 min from pumping")
+    axes[2].set_xlabel("t_trigger_arrival (min)")
+    axes[2].set_ylabel("t_total_after_initial_pumping (min)")
+    axes[2].set_title("A: 270 μm total vs arrival")
+    axes[2].legend(fontsize=7)
+
+    fig.suptitle(
+        "Trigger timing envelope (model). Arrival is operational, not intrinsic kinetics.",
+        fontsize=11,
+    )
+    _save(fig, "31_trigger_timing_envelope", figdir)
+
+
+def figure_32_two_stage_sequence(figdir: Path) -> None:
+    fig, ax = plt.subplots(figsize=(12.4, 6.6))
+    ax.set_xlim(0, 12.4)
+    ax.set_ylim(0, 6.8)
+    ax.axis("off")
+    ax.add_patch(plt.Rectangle((0.15, 3.55), 12.1, 3.05, facecolor="#deebf7", edgecolor="#1f4e79", lw=1.2))
+    ax.add_patch(plt.Rectangle((0.15, 0.2), 12.1, 3.2, facecolor="#fff2cc", edgecolor="#c45911", lw=1.2))
+    ax.text(0.3, 6.3, "Stage A — placement fluid  (activator NOT freely available)", fontsize=10, weight="bold", color="#1f4e79")
+    ax.text(0.3, 3.05, "Stage B — aqueous activator chase  (trigger starts here)", fontsize=10, weight="bold", color="#c45911")
+    a_steps = [
+        (2.1, 4.85, "1. Inject Stage A\nreactive-droplet\nfluid"),
+        (6.2, 4.85, "2. Droplets travel\ncatalyst remains\nlatent"),
+        (10.3, 4.85, "3. Target region\nbecomes populated"),
+    ]
+    b_steps = [
+        (1.35, 1.55, "4. Stage B\nchase enters"),
+        (3.35, 1.55, "5. Activator\nreaches droplets"),
+        (5.35, 1.55, "6. Interface\npartitioning"),
+        (7.35, 1.55, "7. Surface-to-core\ncure"),
+        (9.35, 1.55, "8. Discrete\nparticles"),
+        (11.25, 1.55, "9. Open\npathways"),
+    ]
+    for x, y, text in a_steps:
+        ax.add_patch(plt.Circle((x, y), 1.05, facecolor="white", edgecolor="#1f4e79", lw=1.4))
+        ax.text(x, y, text, ha="center", va="center", fontsize=7.4)
+    for x, y, text in b_steps:
+        ax.add_patch(plt.Circle((x, y), 0.88, facecolor="white", edgecolor="#c45911", lw=1.4))
+        ax.text(x, y, text, ha="center", va="center", fontsize=6.8)
+    for i in range(len(a_steps) - 1):
+        ax.annotate(
+            "",
+            xy=(a_steps[i + 1][0] - 1.1, a_steps[i + 1][1]),
+            xytext=(a_steps[i][0] + 1.1, a_steps[i][1]),
+            arrowprops=dict(arrowstyle="->", color="#1f4e79", lw=1.5),
+        )
+    for i in range(len(b_steps) - 1):
+        ax.annotate(
+            "",
+            xy=(b_steps[i + 1][0] - 0.92, b_steps[i + 1][1]),
+            xytext=(b_steps[i][0] + 0.92, b_steps[i][1]),
+            arrowprops=dict(arrowstyle="->", color="#c45911", lw=1.3),
+        )
+    ax.annotate(
+        "",
+        xy=(1.35, 2.45),
+        xytext=(10.3, 3.75),
+        arrowprops=dict(arrowstyle="->", color="#636363", lw=1.2, linestyle="dashed"),
+    )
+    ax.text(
+        6.2,
+        3.35,
+        "Activator withheld until chase arrives  →  t_trigger_arrival is operational, not kinetics",
+        ha="center",
+        fontsize=8,
+        color="#525252",
+    )
+    ax.set_title("PhaseForge-ChemGate two-stage deployment sequence (implementation concept, not validated hardware)")
+    _save(fig, "32_two_stage_deployment_sequence", figdir)
+
+
 def generate_chemgate_figures(figdir: Path, tab: Path) -> None:
     figure_17_candidate_comparison(figdir, tab)
     figure_18_chemgate_schematic(figdir)
@@ -289,3 +421,5 @@ def generate_chemgate_figures(figdir: Path, tab: Path) -> None:
     figure_24_shell(figdir)
     figure_25_high_tg(figdir, tab)
     figure_26_30_cfd_and_decision(figdir, tab)
+    figure_31_trigger_timing_envelope(figdir, tab)
+    figure_32_two_stage_sequence(figdir)

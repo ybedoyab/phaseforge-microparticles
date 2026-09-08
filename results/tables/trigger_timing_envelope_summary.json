@@ -1,0 +1,106 @@
+{
+  "D_mode": "lee_ambient",
+  "activator_activity": 1.0,
+  "post_trigger_cure_min_range": [
+    27.103950595828323,
+    34.63718663228494
+  ],
+  "nominal_270um": {
+    "t_post_trigger_particle_min": 28.546530293037698,
+    "t_trigger_arrival_min_scenario": 30.0,
+    "t_trigger_arrival_tag": "ASSUMED_FOR_DEPLOYMENT_SCENARIO",
+    "t_total_after_initial_pumping_min": 58.5465302930377,
+    "t_arr_min_allowable_min": 0.0,
+    "t_arr_max_allowable_min": 46.4534697069623,
+    "requires_arbitrary_fixed_30_min": false
+  },
+  "allowable_arrival_across_feasible_diameters_min": {
+    "min": 0.0,
+    "max": 47.89604940417168
+  },
+  "per_diameter": [
+    {
+      "diameter_um": 70.0,
+      "t_post_trigger_particle_min": 27.103950595828323,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 47.89604940417168,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 100.0,
+      "t_post_trigger_particle_min": 27.212144073119028,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 47.78785592688097,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 150.0,
+      "t_post_trigger_particle_min": 27.47732416451781,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 47.52267583548219,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 200.0,
+      "t_post_trigger_particle_min": 27.848576292476103,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 47.1514237075239,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 270.0,
+      "t_post_trigger_particle_min": 28.546530293037698,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 46.4534697069623,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 300.0,
+      "t_post_trigger_particle_min": 28.909296658071234,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 46.090703341928766,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 400.0,
+      "t_post_trigger_particle_min": 30.39430516990442,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 44.60569483009558,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 500.0,
+      "t_post_trigger_particle_min": 32.30360182797565,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 42.69639817202435,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    },
+    {
+      "diameter_um": 600.0,
+      "t_post_trigger_particle_min": 34.63718663228494,
+      "t_trigger_arrival_min_allowable": 0.0,
+      "t_trigger_arrival_max_allowable": 40.36281336771506,
+      "feasible": true,
+      "interpretation_B_in_window": true,
+      "D_mode": "lee_ambient"
+    }
+  ],
+  "requires_arbitrary_fixed_30_min": false,
+  "status": "UNKNOWN"
+}

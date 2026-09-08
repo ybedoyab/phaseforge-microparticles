@@ -36,7 +36,7 @@ Use the words **predicted**, **analogue**, **candidate**, or **approximately**:
 - **Analogue** residual flow/conductivity: Chen conductivity cells; PhaseForge `k_rel` is **relative to an assumed k_open = 1e-8 m²**, not measured fracture conductivity.
 - Coalescence **risk score** is a comparative optimization metric (**ASSUMED_FOR_SENSITIVITY**). Heuristic low risk is **MARGINAL**, not a hard agglomeration PASS.
 - Monte Carlo simultaneous-compliance probabilities (n = 400) should be quoted to **about 2 significant digits**.
-- **PhaseForge-ChemGate** (primary high-T framing): chemically gated microreactor droplets. Lee 2024/2025 demonstrate high-T latency of D899 until Cu(I) and aqueous-to-organic activator diffusion. **Not our invention.** 25–75 min at 150 °C is modelled.
+- **PhaseForge-ChemGate** (primary high-T framing): two-stage chemically gated microreactor droplets. Stage A withholds available activator; Stage B is an aqueous chase. Lee 2024/2025 demonstrate high-T latency of D899 until Cu(I) and aqueous-to-organic activator diffusion. **Not our invention.** Modelled post-trigger particle time is **approximately 27–35 min** (≈29 min at 270 μm). Operational trigger arrival is tagged `ASSUMED_FOR_DEPLOYMENT_SCENARIO` and is **not** intrinsic kinetics. 25–75 min at 150 °C from pumping is a **design envelope**, not a measured delay.
 - Kordes 2024: hexacoordinated Mo NHC **does not polymerize DCPD up to ~150 °C**.
 - Zhan 2024: sequential crosslinking can raise pDCPD-family Tg above 150 °C (**analogue**, not crush data).
 - R03: a 70 °C candidate does **not** automatically satisfy operation up to approximately 150 °C. Upper-temperature capability of **exact PhaseForge = UNKNOWN**.
@@ -56,3 +56,4 @@ Use the words **predicted**, **analogue**, **candidate**, or **approximately**:
 - Do not claim “PhaseForge works at 150 °C”
 - Do not claim D899, Cu activation, or patented Mo complexes as our IP
 - Do not treat Lee 2025 D as a 150 °C measurement
+- Do not say ChemGate intrinsically delays cure for a fixed ~60 min; separate operational `t_trigger_arrival` from modelled `t_post_trigger_particle`

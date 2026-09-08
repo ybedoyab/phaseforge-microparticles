@@ -152,7 +152,7 @@ def chemgate_engineering_search(seed: int = 42) -> dict:
     rng = np.random.default_rng(seed)
     hits = []
     for d in (70.0, 100.0, 150.0, 200.0, 270.0, 400.0, 600.0):
-        for delay_min in (20.0, 30.0, 45.0):
+        for arrival_min in (0.0, 10.0, 20.0, 30.0, 45.0, 60.0):
             for act in (0.3, 1.0, 3.0):
                 for K in (0.5, 1.0, 2.0):
                     if rng.random() > 0.7:
@@ -160,20 +160,21 @@ def chemgate_engineering_search(seed: int = 42) -> dict:
                     r = evaluate_chemgate(
                         ChemGateInputs(
                             diameter_um=d,
-                            t_delay_s=delay_min * 60.0,
+                            t_trigger_arrival_s=arrival_min * 60.0,
                             activator_activity=act,
                             partition_K=K,
                             D_mode="lee_ambient",
                         )
                     )
-                    if 25.0 <= r.t_transform_min <= 75.0:
+                    if 25.0 <= r.t_from_pumping_min <= 75.0:
                         hits.append(
                             {
                                 "d_um": d,
-                                "t_delay_min": delay_min,
+                                "t_trigger_arrival_min": arrival_min,
                                 "activity": act,
                                 "K": K,
-                                "t_transform_min": r.t_transform_min,
+                                "t_post_trigger_particle_min": r.t_post_trigger_particle_min,
+                                "t_total_after_initial_pumping_min": r.t_from_pumping_min,
                                 "pathway": r.pathway,
                                 "status": r.status.value,
                             }
@@ -185,6 +186,7 @@ def chemgate_engineering_search(seed: int = 42) -> dict:
         "random_search": lit,
         "verdict": (
             "Engineering-level ChemGate window is modelled as PLAUSIBLE_CANDIDATE "
-            "when activator contact is delayed. Status remains UNKNOWN, never PASS."
+            "for a range of Stage-B trigger-arrival times (0-60 min search), not a "
+            "single 30 min kinetic delay. Status remains UNKNOWN, never PASS."
         ),
     }

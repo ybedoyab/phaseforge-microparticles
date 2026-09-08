@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from phaseforge.candidates import all_family_cards
+from phaseforge.chemgate import envelope_summary, evaluate_chemgate
 from phaseforge.chemgate_figures import generate_chemgate_figures
 from phaseforge.coupled import (
     CoupledResult,
@@ -660,6 +661,8 @@ def write_final_metrics(nom: CoupledResult, hpht: CoupledResult, mc: dict[str, A
             phi=0.15,
         )
     )
+    cg = evaluate_chemgate()
+    cg_env = envelope_summary()
     mc_rounded = dict(mc)
     if mc.get("probabilities"):
         mc_rounded = {
@@ -697,8 +700,27 @@ def write_final_metrics(nom: CoupledResult, hpht: CoupledResult, mc: dict[str, A
                 "PhaseForge-HT-Thermal: Kordes 2024 supports no DCPD polymerization up to 150 C; "
                 "activation at exactly 150 C is UNKNOWN. "
                 "PhaseForge-ChemGate removes the intrinsic Ru/phosphite kinetic conflict via chemical "
-                "gating; 25-75 min at 150 C is modelled, not measured (UNKNOWN / PLAUSIBLE_CANDIDATE)."
+                "gating. In the nominal deployment scenario, approximately "
+                f"{cg.t_trigger_arrival_s / 60.0:.0f} min of controlled Stage-B trigger arrival "
+                f"({cg.t_trigger_arrival_tag}) is followed by a modelled approximately "
+                f"{cg.t_post_trigger_particle_min:.0f} min post-trigger "
+                "partition/diffusion/activation/cure sequence. The 25-75 min window at 150 C is "
+                "modelled, not measured (UNKNOWN / PLAUSIBLE_CANDIDATE). "
+                "Do not describe t_trigger_arrival as material kinetics."
             ),
+        },
+        "chemgate_timing": {
+            "status": "UNKNOWN",
+            "t_post_trigger_particle_min": cg.t_post_trigger_particle_min,
+            "t_trigger_arrival_min_nominal_scenario": cg.t_trigger_arrival_s / 60.0,
+            "t_trigger_arrival_tag": cg.t_trigger_arrival_tag,
+            "t_total_after_initial_pumping_min": cg.t_from_pumping_min,
+            "t_arr_min_allowable_min": cg.t_arr_min_allowable_min,
+            "t_arr_max_allowable_min": cg.t_arr_max_allowable_min,
+            "requires_arbitrary_fixed_30_min": False,
+            "diameter_um": 270.0,
+            "diffusion_model": "lee_ambient",
+            "envelope": cg_env,
         },
         "reviewer_facing_nominal": {
             "mu_eff_cP": round_cP(nom.viscosity.mu_eff_cP),
@@ -730,7 +752,7 @@ def write_candidate_requirements_matrix(tab: Path) -> pd.DataFrame:
         ("R07_transformation_window", {
             "PhaseForge-RuP": ("FAIL", "t_solid ~1.6 min at 150 C"),
             "PhaseForge-HT-Thermal": ("UNKNOWN", "No 25-75 min isothermal at 150 C"),
-            "PhaseForge-ChemGate": ("UNKNOWN", "Modelled plausible with delayed contact; not PASS"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Modelled plausible two-stage envelope; not PASS"),
             "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Unmeasured at 150 C"),
         }),
         ("R08_discrete_particles", {
@@ -772,7 +794,7 @@ def write_candidate_requirements_matrix(tab: Path) -> pd.DataFrame:
         ("R17_no_bulk_gel", {
             "PhaseForge-RuP": ("FAIL", "If 150 C cure is seconds, isolation may fail"),
             "PhaseForge-HT-Thermal": ("UNKNOWN", "Latent during transport analogue"),
-            "PhaseForge-ChemGate": ("UNKNOWN", "Requires delayed activator; otherwise small drops cure too fast"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Requires Stage-B chase; Stage A must not contain available activator"),
             "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Requires delayed acid contact"),
         }),
     ]
