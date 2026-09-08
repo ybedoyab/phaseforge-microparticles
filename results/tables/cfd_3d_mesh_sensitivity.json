@@ -1,0 +1,21 @@
+{
+  "label": "mesh sensitivity",
+  "not_mesh_independence": true,
+  "nominal": {
+    "time_s": 0.08,
+    "n_droplets": 4,
+    "d_eq_um_mean": 477.7187369960731,
+    "sphericity_mean": 0.97306535915699,
+    "pressure_drop_Pa": 3.9721523767773435,
+    "centroid_x_mean_m": 0.010424251003287793
+  },
+  "coarse": {
+    "time_s": 0.08,
+    "n_droplets": 3,
+    "d_eq_um_mean": 411.9043685167988,
+    "sphericity_mean": 1.210734834926173,
+    "pressure_drop_Pa": 3.8851253948437505,
+    "centroid_x_mean_m": 0.008144605135859616
+  },
+  "provenance": "CFD_3D_MODEL_PREDICTION"
+}

@@ -1,0 +1,13 @@
+# ParaView state notes for PhaseForge 3D
+#
+# This is a lightweight state companion. Full GUI states are version-specific.
+# Open the case with the .foam file, then apply:
+#   Contour on alpha.water = 0.5
+#   Camera azimuth 32 deg, elevation 22 deg, perspective on
+#   White background
+#   Transparent channel outline (Extract Surface / Feature Edges)
+#
+# Case: simulations/cfd/phaseforge_channel_3d/phaseforge_3d.foam
+# HPHT: simulations/cfd/phaseforge_channel_3d_hpht/phaseforge_3d.foam
+#
+# See docs/paraview_manual_open.md

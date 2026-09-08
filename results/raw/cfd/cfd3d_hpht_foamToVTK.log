@@ -1,0 +1,71 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _70874860-20230612 OPENFOAM=2212 patch=230612 version=2212
+Arch   : "LSB;label=32;scalar=64"
+Exec   : foamToVTK
+Date   : Sep 08 2026
+Time   : 18:32:54
+Host   : 0c1a865727c7
+PID    : 255
+I/O    : uncollated
+Case   : /data/phaseforge_channel_3d_hpht
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Initial memory 117076 kB
+Create mesh for time = 0
+
+VTK mesh topology: 2.82 s, 211228 kB
+Time: 0
+    volScalar    : alpha.water alpha.water.org p_rgh
+    volVector    : U
+    Internal  : "VTK/phaseforge_channel_3d_hpht_0/internal.vtu"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_0/boundary/inlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_0/boundary/outlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_0/boundary/walls.vtp"
+Wrote in 3.17 s, 511080 kB
+Time: 0.02
+    volScalar    : alpha.water p p_rgh
+    volVector    : U
+    Internal  : "VTK/phaseforge_channel_3d_hpht_84/internal.vtu"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_84/boundary/inlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_84/boundary/outlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_84/boundary/walls.vtp"
+Wrote in 3.32 s, 488040 kB
+Time: 0.04
+    volScalar    : alpha.water p p_rgh
+    volVector    : U
+    Internal  : "VTK/phaseforge_channel_3d_hpht_156/internal.vtu"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_156/boundary/inlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_156/boundary/outlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_156/boundary/walls.vtp"
+Wrote in 3.13 s, 488040 kB
+Time: 0.06
+    volScalar    : alpha.water p p_rgh
+    volVector    : U
+    Internal  : "VTK/phaseforge_channel_3d_hpht_232/internal.vtu"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_232/boundary/inlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_232/boundary/outlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_232/boundary/walls.vtp"
+Wrote in 3.27 s, 488040 kB
+Time: 0.08
+    volScalar    : alpha.water p p_rgh
+    volVector    : U
+    Internal  : "VTK/phaseforge_channel_3d_hpht_332/internal.vtu"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_332/boundary/inlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_332/boundary/outlet.vtp"
+    Boundary  : "VTK/phaseforge_channel_3d_hpht_332/boundary/walls.vtp"
+Wrote in 3.42 s, 488040 kB
+
+End: 19.13 s, 523248 kB (peak)
+

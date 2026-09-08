@@ -59,9 +59,20 @@ results/raw/cfd/**
 !results/raw/cfd/phaseforge_moderate_metadata.txt
 !results/raw/cfd/phaseforge_hpht_interFoam.log
 !results/raw/cfd/phaseforge_hpht_metadata.txt
+!results/raw/cfd/cfd3d_*_interFoam.log
+!results/raw/cfd/cfd3d_*_metadata.txt
+!results/raw/cfd/cfd3d_*_checkMesh.log
+!results/raw/cfd/cfd3d_*_residuals.txt
+!results/raw/cfd/cfd3d_*_blockMesh.log
+!results/raw/cfd/cfd3d_*_setFields.log
+!results/raw/cfd/cfd3d_*_foamToVTK.log
+!results/raw/cfd/cfd3d_*_decomposePar.log
 !results/raw/cfd/docker_info.txt
 *.OpenFOAM
 *.foam
+!simulations/cfd/phaseforge_channel_3d/phaseforge_3d.foam
+!simulations/cfd/phaseforge_channel_3d_hpht/phaseforge_3d.foam
+!simulations/cfd/phaseforge_channel_3d_coarse/phaseforge_3d.foam
 
 # Docker / images
 *.tar

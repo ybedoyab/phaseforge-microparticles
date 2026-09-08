@@ -1,0 +1,9 @@
+{
+  "generated_utc": "2026-09-08T16:55:28.992959+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "moderate",
+  "timestep": "phaseforge_channel_3d_84.vtm",
+  "field": "mesh wireframe",
+  "file": "10_3d_mesh_detail.png"
+}

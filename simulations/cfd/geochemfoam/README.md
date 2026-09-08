@@ -13,6 +13,7 @@ python scripts/cfd_postprocess.py
 `--solve` attempts:
 
 1. One official two-phase GeoChemFoam or OpenFOAM `interFoam` tutorial, with logs under `results/raw/cfd/`.
-2. The custom 2D PhaseForge channel in `simulations/cfd/phaseforge_channel/` (water continuous, organic droplets, IFT 4 mN/m).
+2. The custom **2D screening** PhaseForge channel in `simulations/cfd/phaseforge_channel/`.
+3. The **true 3D** demonstration in `simulations/cfd/phaseforge_channel_3d/` via `uv run python scripts/run_cfd_3d.py`.
 
 If Docker Desktop’s engine is not running, the script records `docker_unavailable.txt` and **does not fabricate fields**.

@@ -1,0 +1,100 @@
+Interface Courant Number mean: 0.000365413 max: 0.409655
+Time = 0.0758663
+ExecutionTime = 2017.4 s  ClockTime = 2025 s
+Courant Number mean: 0.0908206 max: 0.409169
+Interface Courant Number mean: 0.000352041 max: 0.409169
+Time = 0.0759751
+ExecutionTime = 2023.29 s  ClockTime = 2031 s
+Courant Number mean: 0.088429 max: 0.409332
+Interface Courant Number mean: 0.0003377 max: 0.409332
+Time = 0.076081
+ExecutionTime = 2029.25 s  ClockTime = 2037 s
+Courant Number mean: 0.0860995 max: 0.404937
+Interface Courant Number mean: 0.000323439 max: 0.404937
+Time = 0.0761869
+ExecutionTime = 2033.57 s  ClockTime = 2041 s
+Courant Number mean: 0.0860962 max: 0.405047
+Interface Courant Number mean: 0.000324282 max: 0.405047
+Time = 0.0762929
+ExecutionTime = 2038.93 s  ClockTime = 2047 s
+Courant Number mean: 0.0860921 max: 0.39851
+Interface Courant Number mean: 0.000324298 max: 0.39851
+Time = 0.0763988
+ExecutionTime = 2044.27 s  ClockTime = 2052 s
+Courant Number mean: 0.0860876 max: 0.388768
+Interface Courant Number mean: 0.000320481 max: 0.388768
+Time = 0.0765079
+ExecutionTime = 2048.58 s  ClockTime = 2056 s
+Courant Number mean: 0.088691 max: 0.384989
+Interface Courant Number mean: 0.000331089 max: 0.384989
+Time = 0.0766205
+ExecutionTime = 2054.43 s  ClockTime = 2062 s
+Courant Number mean: 0.0915459 max: 0.379697
+Interface Courant Number mean: 0.000338617 max: 0.379697
+Time = 0.0767412
+ExecutionTime = 2060.35 s  ClockTime = 2068 s
+Courant Number mean: 0.098077 max: 0.376689
+Interface Courant Number mean: 0.000359487 max: 0.376689
+Time = 0.0768716
+ExecutionTime = 2066.69 s  ClockTime = 2075 s
+Courant Number mean: 0.105913 max: 0.361049
+Interface Courant Number mean: 0.000376088 max: 0.361049
+Time = 0.0770138
+ExecutionTime = 2072.44 s  ClockTime = 2080 s
+Courant Number mean: 0.11553 max: 0.33531
+Interface Courant Number mean: 0.000407234 max: 0.33531
+Time = 0.077171
+ExecutionTime = 2078.25 s  ClockTime = 2086 s
+Courant Number mean: 0.127676 max: 0.325187
+Interface Courant Number mean: 0.000449277 max: 0.32225
+Time = 0.0773478
+ExecutionTime = 2084.02 s  ClockTime = 2092 s
+Courant Number mean: 0.143618 max: 0.343142
+Interface Courant Number mean: 0.00051925 max: 0.328422
+Time = 0.0775518
+ExecutionTime = 2089.61 s  ClockTime = 2098 s
+Courant Number mean: 0.165688 max: 0.385174
+Interface Courant Number mean: 0.000611002 max: 0.369659
+Time = 0.0777558
+ExecutionTime = 2095.18 s  ClockTime = 2103 s
+Courant Number mean: 0.165666 max: 0.368087
+Interface Courant Number mean: 0.000609743 max: 0.368087
+Time = 0.0779802
+ExecutionTime = 2101.01 s  ClockTime = 2109 s
+Courant Number mean: 0.18221 max: 0.406267
+Interface Courant Number mean: 0.000672459 max: 0.392272
+Time = 0.0782046
+ExecutionTime = 2106.79 s  ClockTime = 2115 s
+Courant Number mean: 0.18219 max: 0.392654
+Interface Courant Number mean: 0.000655323 max: 0.389396
+Time = 0.0784291
+ExecutionTime = 2112.97 s  ClockTime = 2121 s
+Courant Number mean: 0.182174 max: 0.409692
+Interface Courant Number mean: 0.000651487 max: 0.409692
+Time = 0.0786535
+ExecutionTime = 2118.53 s  ClockTime = 2127 s
+Courant Number mean: 0.182166 max: 0.398411
+Interface Courant Number mean: 0.000656699 max: 0.398411
+Time = 0.0788779
+ExecutionTime = 2124.32 s  ClockTime = 2132 s
+Courant Number mean: 0.182168 max: 0.391544
+Interface Courant Number mean: 0.000669967 max: 0.391544
+Time = 0.0791023
+ExecutionTime = 2130.1 s  ClockTime = 2138 s
+Courant Number mean: 0.18218 max: 0.393683
+Interface Courant Number mean: 0.000688017 max: 0.393683
+Time = 0.0793267
+ExecutionTime = 2135.61 s  ClockTime = 2144 s
+Courant Number mean: 0.182201 max: 0.414286
+Interface Courant Number mean: 0.000692444 max: 0.414286
+Time = 0.0795512
+ExecutionTime = 2140.51 s  ClockTime = 2149 s
+Courant Number mean: 0.182229 max: 0.433789
+Interface Courant Number mean: 0.000702424 max: 0.433789
+Time = 0.0797756
+ExecutionTime = 2145.46 s  ClockTime = 2154 s
+Courant Number mean: 0.182261 max: 0.459819
+Interface Courant Number mean: 0.000721163 max: 0.459819
+Time = 0.08
+ExecutionTime = 2152.46 s  ClockTime = 2161 s
+End

@@ -1,0 +1,4 @@
+# ParaView state notes for PhaseForge 3D HPHT property analogue
+# Case: simulations/cfd/phaseforge_channel_3d_hpht/phaseforge_3d.foam
+# Use the same pipeline as visualization/phaseforge_3d.pvsm
+# 150 C liquid-property analogue; not a 10,000 psi chemistry model.

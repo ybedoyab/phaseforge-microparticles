@@ -1,0 +1,100 @@
+Interface Courant Number mean: 0.00254753 max: 0.391068
+Time = 0.0659933
+ExecutionTime = 90.1 s  ClockTime = 95 s
+Courant Number mean: 0.23762 max: 0.395516
+Interface Courant Number mean: 0.00255329 max: 0.382727
+Time = 0.0665769
+ExecutionTime = 90.66 s  ClockTime = 96 s
+Courant Number mean: 0.237615 max: 0.39669
+Interface Courant Number mean: 0.00248382 max: 0.395384
+Time = 0.0671605
+ExecutionTime = 91.57 s  ClockTime = 96 s
+Courant Number mean: 0.237608 max: 0.396109
+Interface Courant Number mean: 0.00256449 max: 0.39518
+Time = 0.0677441
+ExecutionTime = 92.24 s  ClockTime = 97 s
+Courant Number mean: 0.237603 max: 0.399657
+Interface Courant Number mean: 0.00254945 max: 0.39227
+Time = 0.0683277
+ExecutionTime = 92.96 s  ClockTime = 98 s
+Courant Number mean: 0.237603 max: 0.401885
+Interface Courant Number mean: 0.00253525 max: 0.388226
+Time = 0.0689113
+ExecutionTime = 93.47 s  ClockTime = 98 s
+Courant Number mean: 0.237611 max: 0.402305
+Interface Courant Number mean: 0.00250887 max: 0.395504
+Time = 0.0694949
+ExecutionTime = 94.06 s  ClockTime = 99 s
+Courant Number mean: 0.237623 max: 0.403678
+Interface Courant Number mean: 0.00253129 max: 0.382075
+Time = 0.0700786
+ExecutionTime = 94.61 s  ClockTime = 100 s
+Courant Number mean: 0.237635 max: 0.403321
+Interface Courant Number mean: 0.00253666 max: 0.385588
+Time = 0.0706622
+ExecutionTime = 95.19 s  ClockTime = 100 s
+Courant Number mean: 0.237652 max: 0.397001
+Interface Courant Number mean: 0.0024977 max: 0.38576
+Time = 0.0712458
+ExecutionTime = 95.71 s  ClockTime = 101 s
+Courant Number mean: 0.237667 max: 0.397208
+Interface Courant Number mean: 0.00253088 max: 0.393784
+Time = 0.0718294
+ExecutionTime = 96.3 s  ClockTime = 101 s
+Courant Number mean: 0.237685 max: 0.400812
+Interface Courant Number mean: 0.00260153 max: 0.382135
+Time = 0.072413
+ExecutionTime = 96.89 s  ClockTime = 102 s
+Courant Number mean: 0.237702 max: 0.400411
+Interface Courant Number mean: 0.00256915 max: 0.388789
+Time = 0.0729966
+ExecutionTime = 97.56 s  ClockTime = 103 s
+Courant Number mean: 0.23772 max: 0.392929
+Interface Courant Number mean: 0.00251197 max: 0.392528
+Time = 0.0735802
+ExecutionTime = 98.08 s  ClockTime = 103 s
+Courant Number mean: 0.237731 max: 0.39182
+Interface Courant Number mean: 0.00267665 max: 0.39182
+Time = 0.0741639
+ExecutionTime = 98.68 s  ClockTime = 104 s
+Courant Number mean: 0.237739 max: 0.395139
+Interface Courant Number mean: 0.00269268 max: 0.390927
+Time = 0.0747475
+ExecutionTime = 99.26 s  ClockTime = 104 s
+Courant Number mean: 0.237745 max: 0.399727
+Interface Courant Number mean: 0.00266257 max: 0.395076
+Time = 0.0753311
+ExecutionTime = 99.83 s  ClockTime = 105 s
+Courant Number mean: 0.237748 max: 0.400534
+Interface Courant Number mean: 0.00262547 max: 0.395481
+Time = 0.0759147
+ExecutionTime = 100.42 s  ClockTime = 106 s
+Courant Number mean: 0.23775 max: 0.397423
+Interface Courant Number mean: 0.00265102 max: 0.39572
+Time = 0.0764983
+ExecutionTime = 100.98 s  ClockTime = 106 s
+Courant Number mean: 0.237749 max: 0.400186
+Interface Courant Number mean: 0.0026635 max: 0.394288
+Time = 0.0770819
+ExecutionTime = 101.56 s  ClockTime = 107 s
+Courant Number mean: 0.237752 max: 0.405705
+Interface Courant Number mean: 0.00264691 max: 0.390891
+Time = 0.0776655
+ExecutionTime = 102.09 s  ClockTime = 107 s
+Courant Number mean: 0.237756 max: 0.407543
+Interface Courant Number mean: 0.00264534 max: 0.393007
+Time = 0.0782492
+ExecutionTime = 102.64 s  ClockTime = 108 s
+Courant Number mean: 0.23776 max: 0.405662
+Interface Courant Number mean: 0.00262828 max: 0.396117
+Time = 0.0788328
+ExecutionTime = 103.2 s  ClockTime = 108 s
+Courant Number mean: 0.237764 max: 0.403015
+Interface Courant Number mean: 0.00265634 max: 0.395722
+Time = 0.0794164
+ExecutionTime = 103.75 s  ClockTime = 109 s
+Courant Number mean: 0.237773 max: 0.408654
+Interface Courant Number mean: 0.00268595 max: 0.391515
+Time = 0.08
+ExecutionTime = 104.66 s  ClockTime = 110 s
+End

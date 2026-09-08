@@ -1,0 +1,9 @@
+{
+  "generated_utc": "2026-09-08T16:55:23.036360+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "moderate",
+  "timestep": "phaseforge_channel_3d_84.vtm",
+  "field": "alpha.water=0.5",
+  "file": "03_3d_phase_fraction.png"
+}

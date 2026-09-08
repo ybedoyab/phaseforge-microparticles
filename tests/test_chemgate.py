@@ -133,6 +133,7 @@ def test_reviewer_rounding() -> None:
 
 def test_cfd_provenance_tag() -> None:
     assert Provenance.CFD_MODEL_PREDICTION.value == "CFD_MODEL_PREDICTION"
+    assert Provenance.CFD_3D_MODEL_PREDICTION.value == "CFD_3D_MODEL_PREDICTION"
 
 
 def test_high_tg_scenarios_unknown_crush() -> None:

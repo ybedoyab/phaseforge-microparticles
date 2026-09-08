@@ -1,0 +1,9 @@
+{
+  "generated_utc": "2026-09-08T16:55:27.057366+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "moderate",
+  "timestep": "phaseforge_channel_3d_84.vtm",
+  "field": "interface close-up",
+  "file": "07_3d_droplet_closeup.png"
+}

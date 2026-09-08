@@ -77,6 +77,7 @@ Generated under `figures/` (PNG ≥300 dpi, SVG, PDF):
 - `30_candidate_decision_matrix*`
 - `31_trigger_timing_envelope*`
 - `32_two_stage_deployment_sequence*`
+- `figures/cfd3d/phaseforge_3d_submission_panel.png` (true 3D hydrodynamics)
 
 ## Limitations
 
@@ -85,7 +86,7 @@ Generated under `figures/` (PNG ≥300 dpi, SVG, PDF):
 - Hinze/Grace diameters are characteristic, not a full population balance.
 - Strength derating near Tg is a scenario, not a 150 °C crush test.
 - US11377580B2 is a major IP overlap on downhole DCPD/TriCPD ROMP (not legal advice).
-- CFD is optional for CI (`scripts/run_cfd.sh`). Official damBreak and the PhaseForge 2D multi-droplet `interFoam` cases were solved in Docker image `jcmaes/geochemfoam-5.2` (OpenFOAM v2212). Hydrodynamics only; 10,000 psi is not a chemical-rate variable.
+- CFD is optional for CI. **2D screening:** `simulations/cfd/phaseforge_channel`. **3D demonstration:** `simulations/cfd/phaseforge_channel_3d` (`scripts/run_cfd_3d.py`). OpenFOAM v2212 / GeoChemFoam. Hydrodynamics only; 10,000 psi is not a chemical-rate variable. See `docs/cfd_3d_validation.md`.
 
 ## References
 

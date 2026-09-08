@@ -18,7 +18,7 @@ No laboratory experiments were performed on the exact PhaseForge fluid in this r
 - US11377580B2 Table 3 reports **patent experimental** compression yield strengths at RT and **98 °C** for delayed DCPD formulations (see analogue section below).
 - For the **Ru/Grubbs + phosphite** Arrhenius branch used here: **moderate temperature is a feasible candidate window**; **150 °C kinetics FAIL** the 25–75 min hold (predicted solidification on the order of **2 min**, not 25–75 min). Mechanical status at 150 °C is **UNKNOWN**.
 - Predicted emulsion viscosity at the YAML nominal point is **approximately 0.50–0.90 cP** depending on T and φ, below 10 cP.
-- Hinze/Grace with an assumed dissipation structure predicts a characteristic cured size of **approximately 270 μm nominal**, with a **sensitivity range** (see `results/tables/diameter_sensitivity.csv`) rather than a 12-digit micrometre value.
+- A **true 3D** laminar `interFoam` channel (OpenFOAM v2212 / GeoChemFoam) was solved with volumetric spherical droplets. This is hydrodynamic transport only. It does **not** prove ChemGate chemistry or 10,000 psi kinetics.
 
 ## CLAIM WITH QUALIFICATION
 
@@ -57,3 +57,4 @@ Use the words **predicted**, **analogue**, **candidate**, or **approximately**:
 - Do not claim D899, Cu activation, or patented Mo complexes as our IP
 - Do not treat Lee 2025 D as a 150 °C measurement
 - Do not say ChemGate intrinsically delays cure for a fixed ~60 min; separate operational `t_trigger_arrival` from modelled `t_post_trigger_particle`
+- Do not say 3D CFD proves PhaseForge works or validates ChemGate chemistry

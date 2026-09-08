@@ -1,0 +1,9 @@
+{
+  "generated_utc": "2026-09-08T16:55:25.413686+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "moderate",
+  "timestep": "phaseforge_channel_3d_84.vtm",
+  "field": "streamlines unavailable",
+  "file": "05_3d_velocity_streamlines.png"
+}

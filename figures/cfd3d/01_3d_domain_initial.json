@@ -1,0 +1,9 @@
+{
+  "generated_utc": "2026-09-08T16:55:21.034956+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "moderate",
+  "timestep": "phaseforge_channel_3d_0.vtm",
+  "field": "alpha.water isosurface 0.5",
+  "file": "01_3d_domain_initial.png"
+}

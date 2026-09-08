@@ -1,0 +1,16 @@
+TAG=cfd3d_hpht
+OF=v2212
+IMAGE=jcmaes/geochemfoam-5.2
+CASE=phaseforge_channel_3d_hpht
+0
+0.02
+0.04
+0.06
+0.08
+Allrun
+README.md
+VTK
+constant
+phaseforge_3d.foam
+system
+SOLVE_END=yes

@@ -1,0 +1,8 @@
+{
+  "generated_utc": "2026-09-08T17:34:25.797580+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "case": "paired",
+  "field": "interface",
+  "file": "09_3d_moderate_vs_hpht.png"
+}

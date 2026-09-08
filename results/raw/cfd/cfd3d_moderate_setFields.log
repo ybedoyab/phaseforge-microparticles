@@ -1,0 +1,48 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _70874860-20230612 OPENFOAM=2212 patch=230612 version=2212
+Arch   : "LSB;label=32;scalar=64"
+Exec   : setFields
+Date   : Sep 08 2026
+Time   : 17:11:06
+Host   : d24a6d2e1d65
+PID    : 235
+I/O    : uncollated
+Case   : /data/phaseforge_channel_3d
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading setFieldsDict
+
+Setting volume field default values
+    - set internal values of volScalarField: alpha.water = 1
+
+Setting field region values
+
+    Adding cells within sphere, origin = (0.0025 0.00115 0.00065), radius = 0.00025
+    Selected 268/491520 cells
+    - set internal values of volScalarField: alpha.water = 0
+    Adding cells within sphere, origin = (0.005 0.00185 0.0014), radius = 0.00025
+    Selected 268/491520 cells
+    - set internal values of volScalarField: alpha.water = 0
+    Adding cells within sphere, origin = (0.0075 0.0011 0.001), radius = 0.00025
+    Selected 264/491520 cells
+    - set internal values of volScalarField: alpha.water = 0
+    Adding cells within sphere, origin = (0.01 0.00175 0.0007), radius = 0.00025
+    Selected 276/491520 cells
+    - set internal values of volScalarField: alpha.water = 0
+
+End
+

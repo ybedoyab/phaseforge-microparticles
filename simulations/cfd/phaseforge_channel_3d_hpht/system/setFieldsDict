@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+defaultFieldValues
+(
+    volScalarFieldValue alpha.water 1
+);
+
+regions
+(
+    sphereToCell
+    {
+        origin (0.0025 0.00115 0.00065);
+        radius 0.00025;
+        fieldValues ( volScalarFieldValue alpha.water 0 );
+    }
+    sphereToCell
+    {
+        origin (0.005 0.00185 0.0014);
+        radius 0.00025;
+        fieldValues ( volScalarFieldValue alpha.water 0 );
+    }
+    sphereToCell
+    {
+        origin (0.0075 0.0011 0.001);
+        radius 0.00025;
+        fieldValues ( volScalarFieldValue alpha.water 0 );
+    }
+    sphereToCell
+    {
+        origin (0.01 0.00175 0.0007);
+        radius 0.00025;
+        fieldValues ( volScalarFieldValue alpha.water 0 );
+    }
+);
+
+// Four volumetric spheres, diameter 500 um. Coordinates in metres.
+// ************************************************************************* //

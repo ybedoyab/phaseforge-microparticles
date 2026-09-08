@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from phaseforge.candidates import all_family_cards
+from phaseforge.cfd_3d_postprocess import write_metrics_csv as write_cfd3d_metrics
 from phaseforge.chemgate import envelope_summary, evaluate_chemgate
 from phaseforge.chemgate_figures import generate_chemgate_figures
 from phaseforge.coupled import (
@@ -905,6 +906,7 @@ def generate_all_figures(*, skip_uq: bool = False) -> dict[str, Any]:
     write_final_metrics(nom, hpht, mc, repo_root() / "results" / "final_metrics.json")
     generate_chemgate_figures(figdir, tab)
     write_candidate_requirements_matrix(tab)
+    write_cfd3d_metrics(tab / "cfd_3d_metrics.csv")
     return {
         "nominal": nom.as_dict(),
         "hpht": hpht.as_dict(),
