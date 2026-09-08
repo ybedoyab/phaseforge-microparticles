@@ -14,7 +14,7 @@ This project did **not** physically perform PhaseForge laboratory experiments.
 | Docker | Server 27.4.0, ~8 GB assigned to engine, 16 CPUs |
 | GeoChemFoam image | `jcmaes/geochemfoam-5.2` (OpenFOAM **v2212**) |
 | ParaView / pvpython | **Not installed** on host; VTK/PyVista used for scientific 3D figures |
-| GitHub Actions | Verify after this push |
+| GitHub Actions | success: https://github.com/ybedoyab/phaseforge-microparticles/actions/runs/34258135741 |
 
 Details: `docs/environment_audit.md`, `docs/cfd_3d_validation.md`.
 

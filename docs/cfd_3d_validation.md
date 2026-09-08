@@ -78,6 +78,15 @@ See `results/tables/cfd_3d_metrics.csv` (`CFD_3D_MODEL_PREDICTION`).
 
 ## Dimensionless groups (U = 0.05 m/s, d = 500 μm, H = 3 mm)
 
+Channel Reynolds number uses height *H* as the length scale. Weber and capillary numbers use droplet diameter.
+
+| Case | Re | We | Ca |
+|---|---|---|---|
+| Moderate-T (~60–70 °C properties) | ≈ 370 | ≈ 0.31 | ≈ 0.0050 |
+| HPHT property analogue (~150 °C liquids) | ≈ 750 | ≈ 0.36 | ≈ 0.0029 |
+
+These groups describe incompressible hydrodynamics only.
+
 ## Limitations
 
 - No chemistry / no ChemGate activation in CFD
@@ -89,6 +98,6 @@ See `results/tables/cfd_3d_metrics.csv` (`CFD_3D_MODEL_PREDICTION`).
 
 ## Claim language
 
-A full three-dimensional multiphase OpenFOAM/GeoChemFoam model was solved to examine hydrodynamic transport of four initially spherical dispersed droplets. The model tracks volumetric phase fraction, velocity and pressure fields and is post-processed from VTK (PyVista; ParaView-compatible `.foam`). In the simulated hydrodynamic interval, see the metrics table for the actual droplet count, deformation and pressure drop.
+A full three-dimensional multiphase OpenFOAM/GeoChemFoam model was solved to examine hydrodynamic transport of four initially spherical dispersed droplets. The model tracks volumetric phase fraction, velocity and pressure fields and is post-processed from VTK (PyVista; ParaView-compatible `.foam`). In the simulated 0.08 s hydrodynamic interval on the nominal 491,520-cell mesh, the four droplets remained discrete (no coalescence), with volume-equivalent diameters approximately 472–485 μm and Wadell sphericity approximately 0.97–0.98. The 150 °C case is a liquid-property analogue and showed the same four discrete droplets with a lower pressure drop (≈2.3 Pa vs ≈4.0 Pa).
 
 Do **not** say the 3D simulation proves PhaseForge works or validates ChemGate chemistry.
