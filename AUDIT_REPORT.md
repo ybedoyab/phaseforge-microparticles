@@ -13,7 +13,7 @@ This project did **not** physically perform PhaseForge laboratory experiments.
 | Python | 3.12 via `uv`; lockfile `uv.lock` |
 | Docker CLI | Installed |
 | Docker engine | **Not reachable** at audit time (`dockerDesktopLinuxEngine` pipe missing). CFD not solved |
-| GitHub Actions | Prior `main` push run `34187273191` **success** (python-ci, 27 s). Workflow now also has `workflow_dispatch`. Do not report a *new* run as success until Actions shows it |
+| GitHub Actions | Latest `main` commit `383ac11`: python-ci **success** (29 s), https://github.com/ybedoyab/phaseforge-microparticles/actions/runs/34192864866. The previous audit commit `f868426` failed in 0 s because the workflow YAML accidentally duplicated the `jobs:` key; that is fixed. An earlier `main` run `34187273191` also succeeded. Local 44/44 tests are separate from Actions |
 
 Details: `docs/environment_audit.md`.
 
