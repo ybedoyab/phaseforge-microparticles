@@ -1,6 +1,19 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-FoamFile { version 2.0; format ascii; class dictionary; object setFieldsDict; }
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
 defaultFieldValues
 (
     volScalarFieldValue alpha.water 1
@@ -8,20 +21,36 @@ defaultFieldValues
 
 regions
 (
-    // Dispersed organic droplets as circular-ish boxes (2D).
-    boxToCell
+    // Four initially separated organic droplets. Coordinates in metres
+    // (OpenFOAM converted mesh). Diameter 500 um.
+    cylinderToCell
     {
-        box (2 1.0 -1) (2.6 1.6 1);
+        p1 (0.0025 0.0015 -1);
+        p2 (0.0025 0.0015 1);
+        radius 0.00025;
         fieldValues ( volScalarFieldValue alpha.water 0 );
     }
-    boxToCell
+    cylinderToCell
     {
-        box (4 1.6 -1) (4.6 2.2 1);
+        p1 (0.0050 0.0019 -1);
+        p2 (0.0050 0.0019 1);
+        radius 0.00025;
         fieldValues ( volScalarFieldValue alpha.water 0 );
     }
-    boxToCell
+    cylinderToCell
     {
-        box (6 0.8 -1) (6.6 1.4 1);
+        p1 (0.0075 0.0011 -1);
+        p2 (0.0075 0.0011 1);
+        radius 0.00025;
+        fieldValues ( volScalarFieldValue alpha.water 0 );
+    }
+    cylinderToCell
+    {
+        p1 (0.0100 0.0015 -1);
+        p2 (0.0100 0.0015 1);
+        radius 0.00025;
         fieldValues ( volScalarFieldValue alpha.water 0 );
     }
 );
+
+// ************************************************************************* //

@@ -1,13 +1,13 @@
 # PhaseForge 2D channel — hydrodynamics only
 
-This case is a simplified aqueous-continuous / organic-dispersed VoF
-transport setup for `interFoam`.
+Aqueous-continuous / organic-dispersed VoF transport for `interFoam` (OpenFOAM v2212).
 
-- Geometry: 2D channel, 20 mm × 3 mm
-- Continuous: water-like (ρ = 1000 kg/m3, μ ≈ 1 cP)
-- Dispersed: DCPD-like organic (ρ = 980 kg/m3, μ ≈ 1 cP)
-- Interfacial tension: 4 mN/m (within 3–6 mN/m analogue range)
-- **No ROMP chemistry in the solver.** Couple cure time only in postprocessing.
+- Geometry: 2D channel, 20 mm × 3 mm, mesh 200×40
+- Four initially separated 500 μm droplets (`setFields` uses **metres**)
+- Moderate-T properties: `constant/transportProperties` / `.moderate` (~60–70 °C analogue)
+- HPHT thermal-property analogue: `constant/transportProperties.hpht` (~150 °C liquid viscosities/IFT)
+- IFT 3.2–4 mN/m
+- **No ROMP chemistry.** 10,000 psi is not a chemical-rate variable in this incompressible solver.
 
-Do not treat this folder as experimental evidence. If Docker/OpenFOAM
-cannot run, leave logs in `results/raw/cfd/` and do not invent fields.
+Logs: `results/raw/cfd/`. Metrics: `results/tables/cfd_metrics.csv` (`CFD_MODEL_PREDICTION`).
+Time directories and `polyMesh` are gitignored.

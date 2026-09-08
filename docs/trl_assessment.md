@@ -26,7 +26,9 @@ Acceptable phrasing (keep both):
 |---|---|---|
 | ROMP of DCPD to a load-bearing thermoset | 6–9 in manufacturing (RIM pDCPD) | Industrial pDCPD exists; not a downhole microparticle product |
 | Latent ROMP catalysts (Ru/phosphite) | 3–4 laboratory | Hu isothermal gel times; Kordes latency snippets |
-| High-T latent Mo precatalysts (PhaseForge-HT) | laboratory DSC | Elser 2018 / Momin 2021 onsets 52–142 °C; **not** isothermal 25–75 min at 150 °C |
+| High-T latent Mo precatalysts (PhaseForge-HT-Thermal) | laboratory | Kordes 2024: no DCPD polymerization up to 150 °C; trigger >150 °C UNKNOWN |
+| Chemically gated DCPD ROMP (D899/Cu analogue) | 3–4 for the **published analogue systems**; 2–3 for PhaseForge-ChemGate | Lee 2024/2025 demonstrated architecture; not our formulation; 150 °C window unmeasured |
+| Acid-latent Ru | laboratory | Samec 2010; Monsaert 2010; not 150 °C |
 | Downhole DCPD/TriCPD polymer | Patent examples + Hu rock-reinforcement paper | Not equivalent to 70–600 μm discrete particles remaining un-agglomerated |
 | Emulsified resin ISP (epoxy class) | 4–5 lab; some field (Chen 2023 Energy & Fuels field note) | Different chemistry; viscosity often >10 cP |
 | **Integrated PhaseForge fluid** | **TRL 2–3 candidate** | Critical functions have analogues, but the exact brine-dispersed latent DCPD particle system is not experimentally shown here |

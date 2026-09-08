@@ -20,6 +20,7 @@ class Provenance(StrEnum):
     ASSUMED_FOR_SENSITIVITY = "ASSUMED_FOR_SENSITIVITY"
     FITTED = "FITTED"
     MODEL_PREDICTION = "MODEL_PREDICTION"
+    CFD_MODEL_PREDICTION = "CFD_MODEL_PREDICTION"
 
 
 class RequirementStatus(StrEnum):
@@ -99,6 +100,7 @@ def combine_provenance(tags: list[Provenance]) -> Provenance:
     priority = [
         Provenance.ASSUMED_FOR_SENSITIVITY,
         Provenance.FITTED,
+        Provenance.CFD_MODEL_PREDICTION,
         Provenance.MODEL_PREDICTION,
         Provenance.DIGITIZED_FROM_PUBLICATION,
         Provenance.MANUFACTURER_DATA,

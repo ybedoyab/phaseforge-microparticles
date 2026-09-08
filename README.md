@@ -53,10 +53,11 @@ Headline files:
 - A plausible **core-physics** window exists at **moderate temperature (~50–70 °C)** with latent Ru/phosphite ROMP and φ ~ 0.1–0.2: viscosity PASS, delay tunable into 25–75 min, size **approximately 270 μm** (range, not 273.046 μm), RT-derated mechanics PASS candidate.
 - Agglomeration and fracture conductivity are **MARGINAL** (heuristics / unvalidated). They do not independently PASS.
 - At **150 °C**, published Ru/phosphite gel times extrapolate **far below** 25 min (**FAIL**). Mechanical integrity is **UNKNOWN** (near pDCPD Tg).
-- **PhaseForge-HT** (Mo latent precatalysts) is a separate **UNKNOWN** pathway (DSC onsets ~52–142 °C ≠ isothermal 25–75 min at 150 °C).
-- R03 upper-temperature capability of exact PhaseForge remains **UNKNOWN**; a 70 °C candidate does not close “up to ~150 °C.”
+- **PhaseForge-HT-Thermal** (Mo latent): Kordes 2024 supports **no DCPD polymerization up to ~150 °C**; activation at exactly 150 °C **UNKNOWN**.
+- **PhaseForge-ChemGate** is the **primary 150 °C architecture**: chemically gated latent catalyst in droplets; aqueous activator after placement. High-T latency and aqueous-to-organic activation are **published analogues** (Lee 2024/2025). The 25–75 min window at 150 °C is **modelled / UNKNOWN**, never PASS.
+- R03 upper-temperature capability of exact PhaseForge remains **UNKNOWN**; a 70 °C Ru/phosphite candidate does not close “up to ~150 °C.”
 
-Do not read this as “TRL 3 achieved.” See `docs/final_submission_claims.md`.
+Do not read this as “TRL 3 achieved.” See `docs/final_submission_claims.md` and `docs/150C_decision.md`.
 
 ## Representative figures
 
@@ -69,6 +70,11 @@ Generated under `figures/` (PNG ≥300 dpi, SVG, PDF):
 - `11_monte_carlo_compliance*`
 - `15_diameter_uncertainty*`
 - `16_phaseforge_ht_onset*`
+- `17_high_temperature_candidate_comparison*`
+- `18_chemgate_prior_art_architecture*`
+- `22_diameter_activity_feasibility_map*`
+- `29_hydrodynamic_diameter_to_activation_time*`
+- `30_candidate_decision_matrix*`
 
 ## Limitations
 
@@ -77,7 +83,7 @@ Generated under `figures/` (PNG ≥300 dpi, SVG, PDF):
 - Hinze/Grace diameters are characteristic, not a full population balance.
 - Strength derating near Tg is a scenario, not a 150 °C crush test.
 - US11377580B2 is a major IP overlap on downhole DCPD/TriCPD ROMP (not legal advice).
-- CFD is optional (`scripts/run_cfd.sh`); Python POC does not depend on it.
+- CFD is optional for CI (`scripts/run_cfd.sh`). Official damBreak and the PhaseForge 2D multi-droplet `interFoam` cases were solved in Docker image `jcmaes/geochemfoam-5.2` (OpenFOAM v2212). Hydrodynamics only; 10,000 psi is not a chemical-rate variable.
 
 ## References
 

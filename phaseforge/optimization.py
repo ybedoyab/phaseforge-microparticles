@@ -10,6 +10,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from phaseforge.chemgate import ChemGateInputs, evaluate_chemgate, search_plausible_150C
 from phaseforge.coupled import CoupledResult, OperatingPoint, evaluate_point
 from phaseforge.provenance import RequirementStatus
 
@@ -142,5 +143,48 @@ def select_envelopes(results: list[CoupledResult] | None = None) -> dict[str, En
             "aggressive",
             agg,
             "Shorter delay, higher loading, still avoiding FAIL where possible.",
+        ),
+    }
+
+
+def chemgate_engineering_search(seed: int = 42) -> dict:
+    """Search engineering-level ChemGate parameters. Never returns PASS."""
+    rng = np.random.default_rng(seed)
+    hits = []
+    for d in (70.0, 100.0, 150.0, 200.0, 270.0, 400.0, 600.0):
+        for delay_min in (20.0, 30.0, 45.0):
+            for act in (0.3, 1.0, 3.0):
+                for K in (0.5, 1.0, 2.0):
+                    if rng.random() > 0.7:
+                        continue
+                    r = evaluate_chemgate(
+                        ChemGateInputs(
+                            diameter_um=d,
+                            t_delay_s=delay_min * 60.0,
+                            activator_activity=act,
+                            partition_K=K,
+                            D_mode="lee_ambient",
+                        )
+                    )
+                    if 25.0 <= r.t_transform_min <= 75.0:
+                        hits.append(
+                            {
+                                "d_um": d,
+                                "t_delay_min": delay_min,
+                                "activity": act,
+                                "K": K,
+                                "t_transform_min": r.t_transform_min,
+                                "pathway": r.pathway,
+                                "status": r.status.value,
+                            }
+                        )
+    lit = search_plausible_150C(n=80, seed=seed)
+    return {
+        "n_hits_grid": len(hits),
+        "example_hits": hits[:12],
+        "random_search": lit,
+        "verdict": (
+            "Engineering-level ChemGate window is modelled as PLAUSIBLE_CANDIDATE "
+            "when activator contact is delayed. Status remains UNKNOWN, never PASS."
         ),
     }

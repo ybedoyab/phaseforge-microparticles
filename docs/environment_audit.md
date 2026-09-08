@@ -48,7 +48,7 @@ This is a factual snapshot of the machine used to build the PhaseForge computati
 
 ## CFD implication
 
-Docker CLI is installed, so GeoChemFoam **may** be runnable via `jcmaes/geochemfoam-5.2` **if Docker Desktop is started**. At first audit the engine pipe was missing (`dockerDesktopLinuxEngine` not found). Drive C: free space is limited (~24 GB). If the image cannot be pulled, the Python analytical POC remains the primary deliverable. See `AUDIT_REPORT.md`.
+Docker Desktop engine is **running** (Server Version 27.4.0). Image `jcmaes/geochemfoam-5.2` (OpenFOAM v2212) solved the official damBreak tutorial and the PhaseForge multi-droplet channel (moderate + HPHT property analogues). See `AUDIT_REPORT.md` and `results/raw/cfd/cfd_status.json`.
 
 ## Reproducibility command (after `uv sync --extra dev`)
 

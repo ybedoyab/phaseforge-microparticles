@@ -14,8 +14,11 @@ Deliver a liquid with μ ≤ 10 cP, keep it fluid during transport (up to ~150 �
 
 Two catalyst families:
 
-1. **Ru/Grubbs + phosphite (primary modelled branch).** Moderate temperature: feasible **candidate** window. 150 °C: kinetics **FAIL** / mechanics **UNKNOWN**. Do not force a 150 °C PASS.
-2. **PhaseForge-HT (Mo imido alkylidene NHC, Elser 2018 / Momin 2021).** DSC onsets approximately 52–142 °C; exotherm maxima to approximately 174–183 °C. Status **UNKNOWN**. A pathway toward the upper-temperature requirement, not a fabricated isothermal PASS.
+1. **Ru/Grubbs + phosphite (`PhaseForge-RuP`, lower-T reference).** Moderate temperature: feasible **candidate** window. 150 °C: kinetics **FAIL** / mechanics **UNKNOWN**. Do not force a 150 °C PASS.
+2. **PhaseForge-HT-Thermal (Mo NHC).** Kordes 2024: no DCPD polymerization up to ~150 °C; thermal activation **>150 °C**. Status **UNKNOWN**.
+3. **PhaseForge-ChemGate (primary high-T).** Latent catalyst in droplets; aqueous chemical activator after placement. Lee 2024/2025 analogues. 25–75 min at 150 °C **modelled / UNKNOWN**. D899/Cu is **not our IP**.
+
+See `docs/candidate_architecture.md`.
 
 ## Why it may work
 

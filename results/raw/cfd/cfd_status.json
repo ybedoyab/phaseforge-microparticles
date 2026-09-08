@@ -1,1 +1,6 @@
-{"status":"docker_engine_down","detail":"Docker CLI is present but the engine is not reachable (Desktop Linux engine pipe/socket missing)."}
+{
+  "status": "phaseforge_case_solved",
+  "detail": "Official damBreak and PhaseForge moderate+HPHT interFoam reached End. Image jcmaes/geochemfoam-5.2 OpenFOAM v2212.",
+  "image": "jcmaes/geochemfoam-5.2",
+  "openfoam": "v2212"
+}

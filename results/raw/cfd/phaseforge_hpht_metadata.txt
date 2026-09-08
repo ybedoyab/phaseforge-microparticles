@@ -1,0 +1,8 @@
+CASE=phaseforge_channel_hpht
+TAG=hpht_150C_thermal_properties
+SOLVER=interFoam
+IMAGE=jcmaes/geochemfoam-5.2
+OPENFOAM=v2212
+DROPLETS=4 x 500 um
+SOLVE_END=yes
+NOTE=Lower mu/IFT analogue of 150 C liquid water under pressure. Not 10000 psi chemistry.

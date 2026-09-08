@@ -1,0 +1,41 @@
+requirement_id,family,status,overall_family_150C,notes
+R03_transport_temperature,PhaseForge-RuP,FAIL,FAIL,Arrhenius too fast at 150 C
+R03_transport_temperature,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,Pot life to 150 C analogue; not a hold-window proof
+R03_transport_temperature,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Latency decoupled from T if activator withheld
+R03_transport_temperature,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,No 150 C acid-gate experiment
+R06_controlled_activation,PhaseForge-RuP,PASS,FAIL,Moderate-T phosphite analogue
+R06_controlled_activation,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,Thermal trigger >150 C
+R06_controlled_activation,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Chemical gate analogue Lee 2024/2025
+R06_controlled_activation,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Acid gate analogue; exploratory
+R07_transformation_window,PhaseForge-RuP,FAIL,FAIL,t_solid ~1.6 min at 150 C
+R07_transformation_window,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,No 25-75 min isothermal at 150 C
+R07_transformation_window,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Modelled plausible with delayed contact; not PASS
+R07_transformation_window,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Unmeasured at 150 C
+R08_discrete_particles,PhaseForge-RuP,MARGINAL,FAIL,Hypothesis; agglomeration unvalidated
+R08_discrete_particles,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,"Same droplet architecture, unvalidated"
+R08_discrete_particles,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Surface-first shell may help; hypothesis
+R08_discrete_particles,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Unvalidated
+R09_particle_size,PhaseForge-RuP,PASS,FAIL,Hinze/Grace ~70-600 um candidate
+R09_particle_size,PhaseForge-HT-Thermal,PASS,UNKNOWN,Same hydrodynamics
+R09_particle_size,PhaseForge-ChemGate,PASS,UNKNOWN,Same hydro; RD timing prefers ~100-400 um
+R09_particle_size,PhaseForge-ChemGate-Acid,PASS,UNKNOWN,Same hydrodynamics
+R11_minimal_adhesion,PhaseForge-RuP,UNKNOWN,FAIL,High-T sticky cure unknown
+R11_minimal_adhesion,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,Unvalidated
+R11_minimal_adhesion,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Shell-vs-coalescence hypothesis only
+R11_minimal_adhesion,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Unvalidated
+R13_compressive_integrity,PhaseForge-RuP,UNKNOWN,FAIL,150 C near Tg
+R13_compressive_integrity,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,No 150 C crush
+R13_compressive_integrity,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,High-Tg analogues exist; no 6000 psi at 150 C
+R13_compressive_integrity,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,No 150 C crush
+R15_open_pathways,PhaseForge-RuP,MARGINAL,FAIL,Geometric A; conductivity C unvalidated
+R15_open_pathways,PhaseForge-HT-Thermal,MARGINAL,UNKNOWN,Same packing model
+R15_open_pathways,PhaseForge-ChemGate,MARGINAL,UNKNOWN,Same packing model
+R15_open_pathways,PhaseForge-ChemGate-Acid,MARGINAL,UNKNOWN,Same packing model
+R16_flow_through_around,PhaseForge-RuP,MARGINAL,FAIL,k_rel vs assumed k_open
+R16_flow_through_around,PhaseForge-HT-Thermal,MARGINAL,UNKNOWN,k_rel vs assumed k_open
+R16_flow_through_around,PhaseForge-ChemGate,MARGINAL,UNKNOWN,k_rel vs assumed k_open
+R16_flow_through_around,PhaseForge-ChemGate-Acid,MARGINAL,UNKNOWN,k_rel vs assumed k_open
+R17_no_bulk_gel,PhaseForge-RuP,FAIL,FAIL,"If 150 C cure is seconds, isolation may fail"
+R17_no_bulk_gel,PhaseForge-HT-Thermal,UNKNOWN,UNKNOWN,Latent during transport analogue
+R17_no_bulk_gel,PhaseForge-ChemGate,UNKNOWN,UNKNOWN,Requires delayed activator; otherwise small drops cure too fast
+R17_no_bulk_gel,PhaseForge-ChemGate-Acid,UNKNOWN,UNKNOWN,Requires delayed acid contact

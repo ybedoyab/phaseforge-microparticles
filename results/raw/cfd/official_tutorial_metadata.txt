@@ -1,0 +1,8 @@
+TUTORIAL=official_damBreak
+SOLVER=interFoam
+IMAGE=jcmaes/geochemfoam-5.2
+OPENFOAM=v2212 patch=230612
+FIELDS_PRESENT=yes
+TIME_DIRS=0.05 0.1 0.15 0.2 0.25
+OFFICIAL_END=yes
+NOTE=Classic OpenFOAM laminar damBreak geometry solved in GeoChemFoam image. Mesh+setFields+interFoam reached End with nonzero time directories.

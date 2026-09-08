@@ -36,7 +36,9 @@ Use the words **predicted**, **analogue**, **candidate**, or **approximately**:
 - **Analogue** residual flow/conductivity: Chen conductivity cells; PhaseForge `k_rel` is **relative to an assumed k_open = 1e-8 m²**, not measured fracture conductivity.
 - Coalescence **risk score** is a comparative optimization metric (**ASSUMED_FOR_SENSITIVITY**). Heuristic low risk is **MARGINAL**, not a hard agglomeration PASS.
 - Monte Carlo simultaneous-compliance probabilities (n = 400) should be quoted to **about 2 significant digits**.
-- **PhaseForge-HT** is a **candidate pathway** toward the upper-temperature requirement. Status **UNKNOWN**.
+- **PhaseForge-ChemGate** (primary high-T framing): chemically gated microreactor droplets. Lee 2024/2025 demonstrate high-T latency of D899 until Cu(I) and aqueous-to-organic activator diffusion. **Not our invention.** 25–75 min at 150 °C is modelled.
+- Kordes 2024: hexacoordinated Mo NHC **does not polymerize DCPD up to ~150 °C**.
+- Zhan 2024: sequential crosslinking can raise pDCPD-family Tg above 150 °C (**analogue**, not crush data).
 - R03: a 70 °C candidate does **not** automatically satisfy operation up to approximately 150 °C. Upper-temperature capability of **exact PhaseForge = UNKNOWN**.
 
 ## DO NOT CLAIM
@@ -51,4 +53,6 @@ Use the words **predicted**, **analogue**, **candidate**, or **approximately**:
 - Do not treat DSC T_onset as a 25-75 min isothermal hold at 150 C
 - Do not treat an assumed 2000x latency multiplier as a published 150 C gel time
 - Do not report GitHub Actions success unless Actions actually reports success
-- Do not fabricate CFD fields if the solver did not write time directories
+- Do not claim “PhaseForge works at 150 °C”
+- Do not claim D899, Cu activation, or patented Mo complexes as our IP
+- Do not treat Lee 2025 D as a 150 °C measurement

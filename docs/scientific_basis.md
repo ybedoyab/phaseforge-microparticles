@@ -55,4 +55,10 @@ Chen-type epoxy mixtures are the strongest **particle-formation analogue**, but 
 
 ## 6. The 150 °C problem (central)
 
-Madbouly’s Ea and 55 °C anchor imply uninhibited t_gel on the order of **seconds** at 150 °C. Hu’s inhibited system is already ~2 min at 80 °C. Therefore a 25–75 min window at 150 °C is **not** supported by published Ru/phosphite isothermal data. Highly latent Mo NHC catalysts (Elser 2018; Momin 2021) have DSC onsets approximately 52–142 °C and exotherm maxima to approximately 174–183 °C; that is **not** the same as a 50 min isothermal hold at 150 °C. PhaseForge-HT is an **UNKNOWN** pathway, not a PASS. The Ru/phosphite HPHT point is FAIL (kinetics) / UNKNOWN (mechanics).
+Madbouly’s Ea and 55 °C anchor imply uninhibited t_gel on the order of **seconds** at 150 °C. Hu’s inhibited system is already ~2 min at 80 °C. Therefore a 25–75 min window at 150 °C is **not** supported by published Ru/phosphite isothermal data.
+
+**PhaseForge-HT-Thermal:** Kordes 2024 (full HTML) reports a hexacoordinated Mo(VI) imido alkylidene NHC that **does not polymerize DCPD up to ~150 °C**, then thermally activates **above** 150 °C with full conversion at **~175 °C**. Transport stability analogue: **supported**. Exact 25–75 min trigger at 150 °C: **UNKNOWN**.
+
+**PhaseForge-ChemGate (primary high-T pathway):** Lee 2024 shows bis-NHC Ru D899 remains dormant through ~200 °C frontal polymerization until Cu(I). Lee 2025 shows aqueous Cu(I) diffusing into organic DCPD-family ink (D ≈ 6×10⁻⁸ cm²/s ambient; surface-to-core cure; ~400 μm diffusion limit at ~20 min). That architecture **decouples** high-T latency from reaction timing. The 25–75 min window at 150 °C is a **model prediction**, not a measurement. D899/Cu is **analogue/prior art**, not a PhaseForge recipe.
+
+See `docs/150C_decision.md` and `docs/candidate_architecture.md`.

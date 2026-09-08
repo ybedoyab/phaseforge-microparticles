@@ -4,7 +4,10 @@ Scores are qualitative (L/M/H). This is an engineering risk register, not a HSE 
 
 | ID | Risk | Probability | Impact | Detectability | Mitigation (concept) | Validation method | Residual |
 |---|---|---|---|---|---|---|---|
-| RK01 | Premature polymerization during pumping | H at 150 °C with published Ru systems; M at 50–70 °C with inhibitor | H (screen-out / tubing set) | M (rheology) | Stronger latent precatalyst; keep T in the 25–75 min envelope; do not claim 150 °C without data | Isothermal t_gel of dispersed system | H at 150 °C |
+| RK01 | Premature polymerization during pumping | H at 150 °C with published Ru/phosphite; **lower** if ChemGate activator is withheld | H (screen-out / tubing set) | M (rheology) | ChemGate delayed contact; do not put activator in transport brine; do not retune RuP to fake PASS | Isothermal t_gel of dispersed system with/without activator | H for RuP at 150 °C; M for ChemGate if gate holds |
+| RK14 | IP overlap US11377580B2 | H | H (commercial) | H | Differentiate microparticle isolation vs pillars; get counsel | Landscape + counsel | H |
+| RK16 | IP overlap D899/Cu (US12338310 and related) | H if recipe copied | H | H | Use architecture only; licensed/unencumbered pair | Counsel | H |
+| RK17 | ChemGate premature cure if activator present during transport | H for 70 μm drops (t_diff minutes) | H | M | External delay / staged activator | Diffusion + jar tests | M–H |
 | RK02 | Too-slow activation | M at low T / high inhibitor | M (particles never form) | H | Reduce inhibitor / raise catalyst activity | Same rheology map | M |
 | RK03 | Bulk gel / continuous plug | M if coalescence during sticky window | H (challenge FAIL) | H (visual) | Keep φ moderate; stabilize interface; avoid gel while drops are in contact | Jar tests + slot flow | M |
 | RK04 | Droplet coalescence | M at low σ, high φ, low shear after pumping | H (size >600 μm, adhesion) | M | IFT 3–5 mN/m analogue; sufficient stabilizer | Emulsion stability + size vs time | M |

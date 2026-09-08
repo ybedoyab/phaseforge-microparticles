@@ -1,0 +1,10 @@
+CASE=phaseforge_channel
+TAG=moderate_60-70C
+SOLVER=interFoam
+IMAGE=jcmaes/geochemfoam-5.2
+OPENFOAM=v2212
+DROPLETS=4 x 500 um
+CELLS_PER_DROPLET=24/8000
+TIME_DIRS=0.02 0.04 0.06 0.08
+SOLVE_END=yes
+NOTE=Incompressible VoF hydrodynamics only. 10000 psi is not a chemical-rate variable.

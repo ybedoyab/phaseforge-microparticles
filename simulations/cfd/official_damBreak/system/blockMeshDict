@@ -1,0 +1,78 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Classic OpenFOAM interFoam laminar damBreak geometry (2D empty).
+convertToMeters 0.146;
+
+vertices
+(
+    (0 0 0)
+    (2 0 0)
+    (2 2 0)
+    (0 2 0)
+    (0 0 0.1)
+    (2 0 0.1)
+    (2 2 0.1)
+    (0 2 0.1)
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (40 40 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    leftWall
+    {
+        type wall;
+        faces ((0 4 7 3));
+    }
+    rightWall
+    {
+        type wall;
+        faces ((1 2 6 5));
+    }
+    lowerWall
+    {
+        type wall;
+        faces ((0 1 5 4));
+    }
+    atmosphere
+    {
+        type patch;
+        faces ((3 7 6 2));
+    }
+    defaultFaces
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

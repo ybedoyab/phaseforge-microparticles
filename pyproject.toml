@@ -59,7 +59,7 @@ ignore = ["E501", "E402"]
 
 [tool.coverage.run]
 source = ["phaseforge"]
-omit = ["phaseforge/reporting.py"]
+omit = ["phaseforge/reporting.py", "phaseforge/chemgate_figures.py"]
 
 [tool.coverage.report]
 fail_under = 55

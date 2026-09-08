@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from phaseforge.candidates import all_family_cards
+from phaseforge.chemgate_figures import generate_chemgate_figures
 from phaseforge.coupled import (
     CoupledResult,
     OperatingPoint,
@@ -684,14 +686,18 @@ def write_final_metrics(nom: CoupledResult, hpht: CoupledResult, mc: dict[str, A
             "answer_40_80C_with_unvalidated_system_claims": nom.overall.value,
             "answer_150C_ru_phosphite": hpht.overall.value,
             "answer_150C_phaseforge_ht": ht.status.value,
+            "answer_150C_chemgate": "UNKNOWN",
+            "strongest_150C_architecture": "PhaseForge-ChemGate (chemically gated microreactor droplets)",
             "notes": (
                 "A computationally plausible core-physics window exists at moderate temperature "
                 "(approximately 50-70 C) with latent Ru/phosphite ROMP and φ~0.1-0.2. "
                 "Agglomeration and fracture conductivity remain MARGINAL (heuristics / unvalidated). "
                 "At 150 C, published Ru/phosphite gel times extrapolate far below 25 min (FAIL). "
                 "Mechanical strength at 150 C is near Tg and remains UNKNOWN. "
-                "PhaseForge-HT (Mo latent precatalysts) is a separate UNKNOWN pathway based on "
-                "DSC onsets approximately 52-142 C, not a fabricated isothermal PASS."
+                "PhaseForge-HT-Thermal: Kordes 2024 supports no DCPD polymerization up to 150 C; "
+                "activation at exactly 150 C is UNKNOWN. "
+                "PhaseForge-ChemGate removes the intrinsic Ru/phosphite kinetic conflict via chemical "
+                "gating; 25-75 min at 150 C is modelled, not measured (UNKNOWN / PLAUSIBLE_CANDIDATE)."
             ),
         },
         "reviewer_facing_nominal": {
@@ -703,6 +709,88 @@ def write_final_metrics(nom: CoupledResult, hpht: CoupledResult, mc: dict[str, A
         },
     }
     path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def write_candidate_requirements_matrix(tab: Path) -> pd.DataFrame:
+    """Per-family statuses for R03, R06–R09, R11, R13, R15–R17. Failures are not hidden."""
+    cards = {c.family: c for c in all_family_cards()}
+    reqs = [
+        ("R03_transport_temperature", {
+            "PhaseForge-RuP": ("FAIL", "Arrhenius too fast at 150 C"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "Pot life to 150 C analogue; not a hold-window proof"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Latency decoupled from T if activator withheld"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "No 150 C acid-gate experiment"),
+        }),
+        ("R06_controlled_activation", {
+            "PhaseForge-RuP": ("PASS", "Moderate-T phosphite analogue"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "Thermal trigger >150 C"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Chemical gate analogue Lee 2024/2025"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Acid gate analogue; exploratory"),
+        }),
+        ("R07_transformation_window", {
+            "PhaseForge-RuP": ("FAIL", "t_solid ~1.6 min at 150 C"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "No 25-75 min isothermal at 150 C"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Modelled plausible with delayed contact; not PASS"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Unmeasured at 150 C"),
+        }),
+        ("R08_discrete_particles", {
+            "PhaseForge-RuP": ("MARGINAL", "Hypothesis; agglomeration unvalidated"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "Same droplet architecture, unvalidated"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Surface-first shell may help; hypothesis"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Unvalidated"),
+        }),
+        ("R09_particle_size", {
+            "PhaseForge-RuP": ("PASS", "Hinze/Grace ~70-600 um candidate"),
+            "PhaseForge-HT-Thermal": ("PASS", "Same hydrodynamics"),
+            "PhaseForge-ChemGate": ("PASS", "Same hydro; RD timing prefers ~100-400 um"),
+            "PhaseForge-ChemGate-Acid": ("PASS", "Same hydrodynamics"),
+        }),
+        ("R11_minimal_adhesion", {
+            "PhaseForge-RuP": ("UNKNOWN", "High-T sticky cure unknown"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "Unvalidated"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Shell-vs-coalescence hypothesis only"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Unvalidated"),
+        }),
+        ("R13_compressive_integrity", {
+            "PhaseForge-RuP": ("UNKNOWN", "150 C near Tg"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "No 150 C crush"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "High-Tg analogues exist; no 6000 psi at 150 C"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "No 150 C crush"),
+        }),
+        ("R15_open_pathways", {
+            "PhaseForge-RuP": ("MARGINAL", "Geometric A; conductivity C unvalidated"),
+            "PhaseForge-HT-Thermal": ("MARGINAL", "Same packing model"),
+            "PhaseForge-ChemGate": ("MARGINAL", "Same packing model"),
+            "PhaseForge-ChemGate-Acid": ("MARGINAL", "Same packing model"),
+        }),
+        ("R16_flow_through_around", {
+            "PhaseForge-RuP": ("MARGINAL", "k_rel vs assumed k_open"),
+            "PhaseForge-HT-Thermal": ("MARGINAL", "k_rel vs assumed k_open"),
+            "PhaseForge-ChemGate": ("MARGINAL", "k_rel vs assumed k_open"),
+            "PhaseForge-ChemGate-Acid": ("MARGINAL", "k_rel vs assumed k_open"),
+        }),
+        ("R17_no_bulk_gel", {
+            "PhaseForge-RuP": ("FAIL", "If 150 C cure is seconds, isolation may fail"),
+            "PhaseForge-HT-Thermal": ("UNKNOWN", "Latent during transport analogue"),
+            "PhaseForge-ChemGate": ("UNKNOWN", "Requires delayed activator; otherwise small drops cure too fast"),
+            "PhaseForge-ChemGate-Acid": ("UNKNOWN", "Requires delayed acid contact"),
+        }),
+    ]
+    rows = []
+    for rid, fams in reqs:
+        for fam, (st, note) in fams.items():
+            rows.append(
+                {
+                    "requirement_id": rid,
+                    "family": fam,
+                    "status": st,
+                    "overall_family_150C": cards[fam].overall_150C.value,
+                    "notes": note,
+                }
+            )
+    df = pd.DataFrame(rows)
+    df.to_csv(tab / "candidate_requirements_matrix.csv", index=False)
+    return df
 
 
 def generate_all_figures(*, skip_uq: bool = False) -> dict[str, Any]:
@@ -793,6 +881,8 @@ def generate_all_figures(*, skip_uq: bool = False) -> dict[str, Any]:
     write_traceability_md(trace, docs)
     figure_evidence_matrix(figdir, trace)
     write_final_metrics(nom, hpht, mc, repo_root() / "results" / "final_metrics.json")
+    generate_chemgate_figures(figdir, tab)
+    write_candidate_requirements_matrix(tab)
     return {
         "nominal": nom.as_dict(),
         "hpht": hpht.as_dict(),

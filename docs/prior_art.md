@@ -13,7 +13,9 @@ This is a technical landscape map for a computational proof-of-concept. It is **
 | DCPD/TriCPD downhole ROMP | US11377580B2 and Hu JPSE | **High overlap** on monomer family, latent phosphite, in-situ polymer, fracturing pillars | Patent emphasizes **pillars/plugs/lost circulation** and sequential polymerizable-composition + spacer stages more than a surfactant-stabilized **microparticle** size window |
 | pDCPD suspension beads | Della Martina 2005 | Droplets as microreactors | Lab beads, not HPHT fracturing fluid; often porogen/extraction |
 | Delayed ROMP catalysts | Kordes/Buchmeiser latent Mo/Ru | Latency toolkit | Not demonstrated as brine-dispersed 70–600 μm particles at 150 °C |
-| PhaseForge-HT Mo NHC | Elser 2018; Momin 2021 | DSC-tunable DCPD onset ~52–142 °C | DSC onset is not 25–75 min isothermal at 150 °C; family status UNKNOWN |
+| PhaseForge-HT-Thermal Mo NHC | Kordes 2024; Elser 2018; Momin 2021 | No DCPD polymerization up to ~150 °C (Kordes); DSC onsets ~52–142 °C | Thermal trigger is >150 °C; 25–75 min at exactly 150 °C UNKNOWN |
+| Chemically gated DCPD ROMP | Lee 2024/2025 D899 + aqueous Cu(I); Suslick 2022 | **Strongest high-T analogue**: latency independent of ~200 °C front; aqueous→organic diffusion activation | **Prior art / high IP risk** if copied. PhaseForge uses the **architecture**, not their recipe |
+| Acid-latent Ru | Samec 2010; Monsaert 2010 | Chemical unmasking | No 150 °C evidence retrieved |
 
 ## US11377580B2 — flag, do not ignore
 

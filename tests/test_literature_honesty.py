@@ -54,6 +54,7 @@ def test_evidence_registry_exists() -> None:
         "ASSUMED_FOR_SENSITIVITY",
         "FITTED",
         "MODEL_PREDICTION",
+        "CFD_MODEL_PREDICTION",
     }
     assert set(df["provenance"].dropna().unique()) <= allowed
 

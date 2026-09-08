@@ -79,14 +79,14 @@
     "notes": "T=150.0 C, \u03c6=0.15, cat=0.5, inh=0.95, latency_extra=1.0, family=ru_phosphite. UNKNOWN never upgraded. kinetics_flag=severe_extrapolation_beyond_published_isothermal_gel_times. Agglomeration heuristic cannot PASS without validation. k_rel is not measured fracture conductivity."
   },
   "phaseforge_ht": {
-    "family": "PhaseForge-HT",
+    "family": "PhaseForge-HT-Thermal",
     "status": "UNKNOWN",
     "T_onset_min_C": 52.0,
     "T_onset_max_C": 142.0,
     "T_exo_max_min_C": 98.0,
     "T_exo_max_max_C": 183.0,
     "isothermal_150C_evidence": false,
-    "notes": "PhaseForge-HT uses published Mo imido alkylidene NHC precatalysts. DSC T_onset approximately 52-142 C (Elser 2018 65-140 C; Momin 2021 52-142 C). Exotherm maxima approximately 98-183 C (Elser to 183 C; Momin to 174 C). A DSC heating-ramp onset is not an isothermal 25-75 min latency at 150 C. No retrieved isothermal hold at 150 C for these complexes in this repository. Status remains UNKNOWN: a credible pathway toward the upper-temperature requirement, not a fabricated PASS.",
+    "notes": "PhaseForge-HT-Thermal uses published Mo imido alkylidene NHC precatalysts. Kordes 2024 (DOI 10.1002/mame.202300367): hexacoordinated Mo(VI) imido alkylidene NHC with chelating methoxy does not polymerize DCPD up to 150 C (long pot life at elevated T); thermal activation at T > 150 C; full DCPD conversion at 175 C / 150 mol-ppm. DSC T_onset approximately 52-142 C (Elser 2018 65-140 C; Momin 2021 52-142 C). Exotherm maxima approximately 98-183 C. Transport stability at ~150 C is a published analogue. Activation at exactly 150 C into a 25-75 min window is UNKNOWN (thermal trigger is >150 C). Status remains UNKNOWN, not a fabricated PASS.",
     "coupled": {
       "label": "phaseforge_ht",
       "catalyst_family": "mo_latent",
@@ -124,7 +124,7 @@
         "SF_mech": 0.3,
         "k_rel": 0.74
       },
-      "notes": "T=150.0 C, \u03c6=0.15, cat=1.0, inh=0.5, latency_extra=1.0, family=mo_latent. UNKNOWN never upgraded. kinetics_flag=dsc_onset_not_isothermal_latency. Agglomeration heuristic cannot PASS without validation. k_rel is not measured fracture conductivity. PhaseForge-HT uses published Mo imido alkylidene NHC precatalysts. DSC T_onset approximately 52-142 C (Elser 2018 65-140 C; Momin 2021 52-142 C). Exotherm maxima approximately 98-183 C (Elser to 183 C; Momin to 174 C). A DSC heating-ramp onset is not an isothermal 25-75 min latency at 150 C. No retrieved isothermal hold at 150 C for these complexes in this repository. Status remains UNKNOWN: a credible pathway toward the upper-temperature requirement, not a fabricated PASS."
+      "notes": "T=150.0 C, \u03c6=0.15, cat=1.0, inh=0.5, latency_extra=1.0, family=mo_latent. UNKNOWN never upgraded. kinetics_flag=dsc_onset_not_isothermal_latency. Agglomeration heuristic cannot PASS without validation. k_rel is not measured fracture conductivity. PhaseForge-HT-Thermal uses published Mo imido alkylidene NHC precatalysts. Kordes 2024 (DOI 10.1002/mame.202300367): hexacoordinated Mo(VI) imido alkylidene NHC with chelating methoxy does not polymerize DCPD up to 150 C (long pot life at elevated T); thermal activation at T > 150 C; full DCPD conversion at 175 C / 150 mol-ppm. DSC T_onset approximately 52-142 C (Elser 2018 65-140 C; Momin 2021 52-142 C). Exotherm maxima approximately 98-183 C. Transport stability at ~150 C is a published analogue. Activation at exactly 150 C into a 25-75 min window is UNKNOWN (thermal trigger is >150 C). Status remains UNKNOWN, not a fabricated PASS."
     }
   },
   "diameter_sensitivity": {
@@ -182,7 +182,9 @@
     "answer_40_80C_with_unvalidated_system_claims": "MARGINAL",
     "answer_150C_ru_phosphite": "FAIL",
     "answer_150C_phaseforge_ht": "UNKNOWN",
-    "notes": "A computationally plausible core-physics window exists at moderate temperature (approximately 50-70 C) with latent Ru/phosphite ROMP and \u03c6~0.1-0.2. Agglomeration and fracture conductivity remain MARGINAL (heuristics / unvalidated). At 150 C, published Ru/phosphite gel times extrapolate far below 25 min (FAIL). Mechanical strength at 150 C is near Tg and remains UNKNOWN. PhaseForge-HT (Mo latent precatalysts) is a separate UNKNOWN pathway based on DSC onsets approximately 52-142 C, not a fabricated isothermal PASS."
+    "answer_150C_chemgate": "UNKNOWN",
+    "strongest_150C_architecture": "PhaseForge-ChemGate (chemically gated microreactor droplets)",
+    "notes": "A computationally plausible core-physics window exists at moderate temperature (approximately 50-70 C) with latent Ru/phosphite ROMP and \u03c6~0.1-0.2. Agglomeration and fracture conductivity remain MARGINAL (heuristics / unvalidated). At 150 C, published Ru/phosphite gel times extrapolate far below 25 min (FAIL). Mechanical strength at 150 C is near Tg and remains UNKNOWN. PhaseForge-HT-Thermal: Kordes 2024 supports no DCPD polymerization up to 150 C; activation at exactly 150 C is UNKNOWN. PhaseForge-ChemGate removes the intrinsic Ru/phosphite kinetic conflict via chemical gating; 25-75 min at 150 C is modelled, not measured (UNKNOWN / PLAUSIBLE_CANDIDATE)."
   },
   "reviewer_facing_nominal": {
     "mu_eff_cP": 0.64,

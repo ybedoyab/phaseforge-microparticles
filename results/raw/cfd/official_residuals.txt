@@ -1,0 +1,80 @@
+DICPCG:  Solving for p_rgh, Initial residual = 0.00840686, Final residual = 0.00019621, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000235332, Final residual = 1.05031e-05, No Iterations 11
+DICPCG:  Solving for p_rgh, Initial residual = 2.82804e-05, Final residual = 9.58606e-08, No Iterations 30
+ExecutionTime = 3.2 s  ClockTime = 7 s
+Time = 0.241842
+DICPCG:  Solving for p_rgh, Initial residual = 0.00823236, Final residual = 0.000196897, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000234699, Final residual = 9.65237e-06, No Iterations 10
+DICPCG:  Solving for p_rgh, Initial residual = 2.68895e-05, Final residual = 9.02065e-08, No Iterations 32
+ExecutionTime = 3.21 s  ClockTime = 7 s
+Time = 0.242425
+DICPCG:  Solving for p_rgh, Initial residual = 0.00818432, Final residual = 0.000193702, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000229391, Final residual = 1.06109e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.60505e-05, Final residual = 9.24764e-08, No Iterations 32
+ExecutionTime = 3.22 s  ClockTime = 7 s
+Time = 0.243008
+DICPCG:  Solving for p_rgh, Initial residual = 0.00811298, Final residual = 0.000191789, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000227589, Final residual = 1.02554e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.60034e-05, Final residual = 9.01901e-08, No Iterations 32
+ExecutionTime = 3.23 s  ClockTime = 7 s
+Time = 0.24359
+DICPCG:  Solving for p_rgh, Initial residual = 0.00875315, Final residual = 0.000186122, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000220533, Final residual = 1.04908e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.57217e-05, Final residual = 9.40287e-08, No Iterations 32
+ExecutionTime = 3.23 s  ClockTime = 7 s
+Time = 0.244173
+DICPCG:  Solving for p_rgh, Initial residual = 0.00860348, Final residual = 0.000190453, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000224273, Final residual = 1.0507e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.61361e-05, Final residual = 8.75772e-08, No Iterations 32
+ExecutionTime = 3.24 s  ClockTime = 7 s
+Time = 0.244756
+DICPCG:  Solving for p_rgh, Initial residual = 0.00822481, Final residual = 0.000196764, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000228919, Final residual = 1.0369e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.61118e-05, Final residual = 9.82353e-08, No Iterations 24
+ExecutionTime = 3.25 s  ClockTime = 7 s
+Time = 0.245339
+DICPCG:  Solving for p_rgh, Initial residual = 0.00801049, Final residual = 0.000200151, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000231189, Final residual = 1.08344e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.65545e-05, Final residual = 8.80615e-08, No Iterations 32
+ExecutionTime = 3.26 s  ClockTime = 7 s
+Time = 0.245921
+DICPCG:  Solving for p_rgh, Initial residual = 0.00799922, Final residual = 0.000201631, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000231586, Final residual = 1.06821e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.60371e-05, Final residual = 8.61707e-08, No Iterations 32
+ExecutionTime = 3.27 s  ClockTime = 7 s
+Time = 0.246504
+DICPCG:  Solving for p_rgh, Initial residual = 0.00803073, Final residual = 0.000202382, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000231861, Final residual = 1.08242e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.55258e-05, Final residual = 8.75437e-08, No Iterations 32
+ExecutionTime = 3.28 s  ClockTime = 7 s
+Time = 0.247087
+DICPCG:  Solving for p_rgh, Initial residual = 0.00845174, Final residual = 0.000201098, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000232339, Final residual = 1.0284e-05, No Iterations 10
+DICPCG:  Solving for p_rgh, Initial residual = 2.58403e-05, Final residual = 8.15724e-08, No Iterations 32
+ExecutionTime = 3.3 s  ClockTime = 8 s
+Time = 0.247669
+DICPCG:  Solving for p_rgh, Initial residual = 0.00839406, Final residual = 0.000209063, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.00023844, Final residual = 1.09061e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.54975e-05, Final residual = 7.73324e-08, No Iterations 32
+ExecutionTime = 3.31 s  ClockTime = 8 s
+Time = 0.248252
+DICPCG:  Solving for p_rgh, Initial residual = 0.0081776, Final residual = 0.00020928, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000238815, Final residual = 1.09618e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.56685e-05, Final residual = 7.86962e-08, No Iterations 32
+ExecutionTime = 3.31 s  ClockTime = 8 s
+Time = 0.248835
+DICPCG:  Solving for p_rgh, Initial residual = 0.00889963, Final residual = 0.000208699, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000237214, Final residual = 9.78711e-06, No Iterations 10
+DICPCG:  Solving for p_rgh, Initial residual = 2.59022e-05, Final residual = 8.0397e-08, No Iterations 32
+ExecutionTime = 3.32 s  ClockTime = 8 s
+Time = 0.249417
+DICPCG:  Solving for p_rgh, Initial residual = 0.00951219, Final residual = 0.000199989, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000226482, Final residual = 9.71934e-06, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.41968e-05, Final residual = 8.00175e-08, No Iterations 32
+ExecutionTime = 3.33 s  ClockTime = 8 s
+Time = 0.25
+DICPCG:  Solving for p_rgh, Initial residual = 0.00912234, Final residual = 0.000199781, No Iterations 2
+DICPCG:  Solving for p_rgh, Initial residual = 0.000225877, Final residual = 1.01909e-05, No Iterations 9
+DICPCG:  Solving for p_rgh, Initial residual = 2.484e-05, Final residual = 8.35011e-08, No Iterations 32
+ExecutionTime = 3.35 s  ClockTime = 8 s
+End

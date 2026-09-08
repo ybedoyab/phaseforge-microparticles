@@ -32,7 +32,14 @@ external/**
 !external/README.md
 
 # Large CFD artefacts
-simulations/cfd/**/processor*/
+simulations/cfd/phaseforge_channel_hpht/
+simulations/cfd/**/constant/polyMesh/
+simulations/cfd/**/VTK/
+simulations/cfd/**/0.[0-9]*
+simulations/cfd/**/[1-9]*
+simulations/cfd/**/*.vtm
+simulations/cfd/**/*.vtm.series
+simulations/cfd/**/*.org
 simulations/cfd/**/*.gz
 simulations/cfd/**/log.*
 results/raw/cfd/**
@@ -43,6 +50,16 @@ results/raw/cfd/**
 !results/raw/cfd/cfd_status.json
 !results/raw/cfd/phaseforge_dimensionless.txt
 !results/raw/cfd/phaseforge_fields_note.txt
+!results/raw/cfd/official_tutorial_solve.log
+!results/raw/cfd/official_tutorial_metadata.txt
+!results/raw/cfd/official_residuals.txt
+!results/raw/cfd/official_blockMesh.log
+!results/raw/cfd/phaseforge_moderate_interFoam.log
+!results/raw/cfd/phaseforge_moderate_residuals.txt
+!results/raw/cfd/phaseforge_moderate_metadata.txt
+!results/raw/cfd/phaseforge_hpht_interFoam.log
+!results/raw/cfd/phaseforge_hpht_metadata.txt
+!results/raw/cfd/docker_info.txt
 *.OpenFOAM
 *.foam
 

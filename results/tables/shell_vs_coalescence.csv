@@ -1,0 +1,4 @@
+diameter_um,t_shell_s,t_coalescence_s,shell_faster,notes
+70,2.041666666666666,5.0,True,"Hypothesis only: if t_shell < t_collision after activator contact, surface-first cure may reduce coalescence. Not experimental proof."
+270,30.374999999999996,5.0,False,"Hypothesis only: if t_shell < t_collision after activator contact, surface-first cure may reduce coalescence. Not experimental proof."
+600,149.99999999999997,5.0,False,"Hypothesis only: if t_shell < t_collision after activator contact, surface-first cure may reduce coalescence. Not experimental proof."
