@@ -1,13 +1,17 @@
 """Packed / distributed microparticles and residual flow pathways.
 
-Baseline: Kozeny-Carman permeability of a granular pack.
-Also: 2D random sequential addition of disks to estimate porosity and
-nearest-neighbor connectivity of the continuous phase.
+Three separate claims (do not conflate):
 
-The challenge requires interconnected open pathways, not a bulk plug.
-If droplets remain isolated at volume fraction φ, the continuous-phase
-area fraction is ~1-φ and flow is around particles. If they settle into
-a pack, porosity is 1-packing_fraction.
+  A. Geometric connectivity / continuous-phase availability
+  B. Analytical permeability estimate (Kozeny-Carman or dilute obstruction)
+  C. Experimentally unvalidated conductivity under closure stress
+
+k_open = 1e-8 m2 is a relative reference assumption, not measured fracture
+conductivity. k_rel must not be presented as experimental or field conductivity.
+
+For the exact PhaseForge system, open-pathway status is MARGINAL until
+CFD or experimental evidence strengthens it (unless geometry is disconnected,
+which is FAIL).
 """
 
 from __future__ import annotations
@@ -17,6 +21,8 @@ from dataclasses import dataclass
 import numpy as np
 
 from phaseforge.provenance import Provenance, RequirementStatus
+
+K_OPEN_ASSUMED_M2 = 1.0e-8  # ASSUMED_FOR_SENSITIVITY relative reference
 
 
 def kozeny_carman(d_m: float, porosity: float, k0: float = 180.0) -> float:
@@ -48,6 +54,7 @@ class PermeabilityInputs:
     U_m_s: float = 0.01
     L_m: float = 1.0
     polydispersity: float = 1.0  # d90/d10 analogue scale
+    validated_conductivity: bool = False  # True only with measured PhaseForge k
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,6 +68,10 @@ class PermeabilityResult:
     status: RequirementStatus
     provenance: Provenance
     notes: str
+    geometric_connectivity: bool
+    k_analytical_m2: float
+    k_open_assumed_m2: float
+    conductivity_under_closure: str
 
 
 def millidarcy(k_m2: float) -> float:
@@ -70,36 +81,41 @@ def millidarcy(k_m2: float) -> float:
 def evaluate_permeability(inp: PermeabilityInputs) -> PermeabilityResult:
     if inp.settled:
         porosity = 1.0 - inp.packing_fraction
-        # Polydispersity reduces porosity slightly
         porosity *= 1.0 / (1.0 + 0.15 * max(inp.polydispersity - 1.0, 0.0))
     else:
-        # Distributed particles occupy φ; continuous phase remains 1-φ
         porosity = 1.0 - inp.phi_particles
-    k = kozeny_carman(inp.d_m, porosity)
-    # For distributed (non-settled) particles, KC of a pack is conservative
-    # (too low). A dilute obstruction correction: k ~ k_open * (1-φ)/(1+φ)
-    # (Maxwell-like). Use the max of dilute and pack estimates when not settled.
-    k_open = 1.0e-8  # not a fracture permeability prediction; relative only
+    k_pack = kozeny_carman(inp.d_m, porosity)
+    k_open = K_OPEN_ASSUMED_M2
     if not inp.settled:
         k_dilute = k_open * (1.0 - inp.phi_particles) / (1.0 + inp.phi_particles)
         k_use = k_dilute
         k_ref = k_open
     else:
-        k_use = k
+        k_use = k_pack
         k_ref = kozeny_carman(inp.d_m, 0.40)
-    dP = darcy_pressure_drop(k_use if inp.settled else max(k_use, k), inp.mu_Pa_s, inp.U_m_s, inp.L_m)
+    dP = darcy_pressure_drop(k_use if inp.settled else max(k_use, k_pack), inp.mu_Pa_s, inp.U_m_s, inp.L_m)
     connected = porosity > 0.18 and inp.phi_particles < 0.64
     k_rel = k_use / max(k_ref, 1e-30)
+
+    # A: geometry; B: analytical k; C: closure-stress conductivity unvalidated.
     if not connected or porosity < 0.12:
         status = RequirementStatus.FAIL
-    elif k_rel < 0.05 and inp.settled:
-        status = RequirementStatus.MARGINAL
+        cond_tag = "UNVALIDATED_DISCONNECTED"
+    elif inp.validated_conductivity:
+        status = RequirementStatus.PASS if k_rel >= 0.05 else RequirementStatus.MARGINAL
+        cond_tag = "MEASURED"
     else:
-        status = RequirementStatus.PASS
+        status = RequirementStatus.MARGINAL
+        cond_tag = "UNVALIDATED_UNDER_CLOSURE"
+
     notes = (
-        f"settled={inp.settled}; φ_particles={inp.phi_particles:.3f}; "
-        f"porosity={porosity:.3f}; k={k_use:.3e} m2 ({millidarcy(k_use):.3g} mD); "
-        f"connected={connected}. Bulk gel / φ→1 is a FAIL."
+        f"A_geometric_connected={connected}; porosity={porosity:.2f}; "
+        f"B_analytical_k={k_use:.1e} m2 ({millidarcy(k_use):.3g} mD); "
+        f"k_rel={k_rel:.2f} is relative to assumed k_open={k_open:.0e} m2 "
+        f"(ASSUMED_FOR_SENSITIVITY, not measured fracture conductivity); "
+        f"C_conductivity_under_closure={cond_tag}. "
+        "Do not present k_rel as experimental or field conductivity. "
+        f"settled={inp.settled}; φ_particles={inp.phi_particles:.3f}."
     )
     return PermeabilityResult(
         porosity=porosity,
@@ -109,8 +125,12 @@ def evaluate_permeability(inp: PermeabilityInputs) -> PermeabilityResult:
         connected=connected,
         k_rel=float(k_rel),
         status=status,
-        provenance=Provenance.MODEL_PREDICTION,
+        provenance=Provenance.ASSUMED_FOR_SENSITIVITY,
         notes=notes,
+        geometric_connectivity=connected,
+        k_analytical_m2=k_use,
+        k_open_assumed_m2=k_open,
+        conductivity_under_closure=cond_tag,
     )
 
 

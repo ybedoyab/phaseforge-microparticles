@@ -1,0 +1,1 @@
+Docker CLI is present but the engine is not reachable (Desktop Linux engine pipe/socket missing).

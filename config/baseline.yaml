@@ -85,12 +85,31 @@ operating_point_hpht:
     The 2000x latency multiplier is NOT a published isothermal 150 C gel time.
     It is an exploratory assumption representing a hypothetical highly latent
     precatalyst. Results at this point are UNKNOWN/FAIL unless tagged as assumed.
+    Do not use this multiplier to force a 150 C PASS for Ru/phosphite.
+
+operating_point_ht:
+  name: PhaseForge-HT
+  catalyst_family: mo_latent
+  temperature_C: 150.0
+  dispersed_volume_fraction: 0.15
+  catalyst_relative: 1.0
+  inhibitor_index: 0.50
+  interfacial_tension_N_m: 0.004
+  shear_rate_1_s: 400.0
+  characteristic_velocity_m_s: 1.5
+  channel_width_m: 0.05
+  residence_time_min: 50.0
+  notes: >
+    Thermally latent Mo imido alkylidene NHC precatalysts (Elser 2018;
+    Momin 2021). Pathway toward the upper-temperature requirement.
+    Status UNKNOWN: no retrieved isothermal 25-75 min evidence at 150 C.
 
 selection_rationale: >
   PhaseForge is selected as the primary candidate because DCPD monomer
   viscosity (~1 cP at 20 C, Madbouly 2025) can meet the <=10 cP delivery
   constraint more credibly than published epoxy PCL mixtures (33-80 mPa s).
-  Isolated-droplet ROMP is supported by Della Martina bead microreactor
-  literature. High-temperature strength and 150 C latency remain unresolved
-  and require laboratory validation. Preference is computational and
-  analogue-based, not experimental proof of an integrated PhaseForge fluid.
+  High-temperature strength and 150 C latency remain unresolved
+  for the Ru/phosphite branch (kinetics FAIL / mechanics UNKNOWN).
+  PhaseForge-HT (Mo latent precatalysts) is a separate UNKNOWN pathway,
+  not a fabricated PASS. Preference is computational and analogue-based,
+  not experimental proof of an integrated PhaseForge fluid.

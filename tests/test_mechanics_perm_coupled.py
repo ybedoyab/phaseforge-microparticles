@@ -28,7 +28,10 @@ def test_mechanics_pass_well_below_tg() -> None:
 def test_distributed_pathways_open() -> None:
     r = evaluate_permeability(PermeabilityInputs(d_m=um_to_m(200), phi_particles=0.15, settled=False))
     assert r.connected is True
-    assert r.status is RequirementStatus.PASS
+    assert r.geometric_connectivity is True
+    # Unvalidated conductivity must not independently PASS.
+    assert r.status is RequirementStatus.MARGINAL
+    assert "ASSUMED" in r.notes or "assumed" in r.notes.lower()
 
 
 def test_bulk_phi_fails_pathways() -> None:

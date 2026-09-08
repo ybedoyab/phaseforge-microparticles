@@ -1,0 +1,1 @@
+No solved OpenFOAM time directories (folder 0/ is initial conditions only). Fields were not fabricated.

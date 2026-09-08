@@ -1,16 +1,18 @@
-# Simplified PhaseForge 2D channel case (reduced-order coupling)
+# GeoChemFoam / OpenFOAM notes
 
 Hydrodynamics only. ROMP chemistry is **not** solved in OpenFOAM.
-Use GeoChemFoam Docker if available:
 
-    bash scripts/run_cfd.sh --check
-    bash scripts/run_cfd.sh
+```
+bash scripts/run_cfd.sh --check
+bash scripts/run_cfd.sh --solve
+python scripts/cfd_postprocess.py
+```
 
-If the image cannot be pulled, this folder documents the intended case:
+`--check` probes the image. A tutorial **directory listing is not a solved case**.
 
-- Geometry: 2D channel / fracture analogue, width ~3 mm, length ~20 mm
-- Fluids: water (continuous) + DCPD-like oil (dispersed), μ ~ 1 cP each
-- Goal: discrete droplet transport visualization, capillary/Weber regime
-- Coupling: one-way — CFD hydrodynamics, Python kinetics/thermal post-process
+`--solve` attempts:
 
-Do not commit large time directories or processor* folders.
+1. One official two-phase GeoChemFoam or OpenFOAM `interFoam` tutorial, with logs under `results/raw/cfd/`.
+2. The custom 2D PhaseForge channel in `simulations/cfd/phaseforge_channel/` (water continuous, organic droplets, IFT 4 mN/m).
+
+If Docker Desktop’s engine is not running, the script records `docker_unavailable.txt` and **does not fabricate fields**.

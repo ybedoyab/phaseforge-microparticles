@@ -64,8 +64,11 @@ def _pass_flags(pt: OperatingPoint) -> dict[str, int]:
         "diameter": int(r.droplets.status == RequirementStatus.PASS),
         "mechanics": int(r.mechanics.status == RequirementStatus.PASS),
         "open_pathways": int(r.permeability.status == RequirementStatus.PASS),
+        "open_pathways_not_fail": int(r.permeability.status != RequirementStatus.FAIL),
         "thermal": int(r.thermal.status == RequirementStatus.PASS),
         "agglomeration": int(r.agglomeration == RequirementStatus.PASS),
+        "agglomeration_not_fail": int(r.agglomeration != RequirementStatus.FAIL),
+        "core_pass": int(r.core_overall == RequirementStatus.PASS),
         "overall_pass": int(r.overall == RequirementStatus.PASS),
         "overall_not_fail": int(r.overall != RequirementStatus.FAIL),
     }
@@ -87,8 +90,11 @@ def monte_carlo_compliance(n: int = 800, seed: int = UQ_SEED) -> dict[str, Any]:
         "diameter",
         "mechanics",
         "open_pathways",
+        "open_pathways_not_fail",
         "thermal",
         "agglomeration",
+        "agglomeration_not_fail",
+        "core_pass",
         "overall_pass",
         "overall_not_fail",
     ]

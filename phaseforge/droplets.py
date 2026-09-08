@@ -19,6 +19,7 @@ import numpy as np
 
 from phaseforge.provenance import Provenance, RequirementStatus
 from phaseforge.requirements import classify_diameter_m
+from phaseforge.rounding import round_um
 from phaseforge.units import m_to_um
 from phaseforge.viscosity import dcpd_viscosity_Pa_s, water_viscosity_Pa_s
 
@@ -80,6 +81,7 @@ class DropletInputs:
     mu_c_Pa_s: float | None = None
     mu_d_Pa_s: float | None = None
     coalescence_scale: float = 1.0
+    turb_dissipation_fraction: float = 0.02
 
 
 @dataclass(frozen=True, slots=True)
@@ -98,6 +100,9 @@ class DropletResult:
     status: RequirementStatus
     provenance: Provenance
     notes: str
+    d_particle_um_nominal: int
+    epsilon: float
+    turb_dissipation_fraction: float
 
 
 def coalescence_risk_score(
@@ -129,7 +134,8 @@ def evaluate_droplets(inp: DropletInputs) -> DropletResult:
     eps_turb = (inp.velocity_m_s**3) / max(inp.length_m, 1e-6)
     # During pumping, a fraction of large-eddy dissipation acts on drops.
     # Length scale is a pipe/annulus diameter, not a 3 mm lab gap.
-    epsilon = max(eps_shear, 0.02 * eps_turb, 1e-4)
+    # Fraction is ASSUMED_FOR_SENSITIVITY (nominal 0.02).
+    epsilon = max(eps_shear, inp.turb_dissipation_fraction * eps_turb, 1e-4)
     d_h = hinze_dmax(inp.sigma_N_m, inp.rho_c, epsilon, inp.hinze_C)
     d_g = grace_d_break(mu_c, inp.shear_rate_1_s, inp.sigma_N_m, lam)
     # Characteristic diameter: geometric blend; Hinze for turbulent delivery,
@@ -144,17 +150,22 @@ def evaluate_droplets(inp: DropletInputs) -> DropletResult:
     Oh = ohnesorge(mu_d, inp.rho_d, inp.sigma_N_m, d32)
     risk = coalescence_risk_score(inp.phi, inp.sigma_N_m, inp.shear_rate_1_s, mu_c, inp.coalescence_scale)
     status = classify_diameter_m(d_p)
+    d_um = m_to_um(d_p)
     notes = (
-        f"d_Hinze={m_to_um(d_h):.1f} um; d_Grace={m_to_um(d_g):.1f} um; "
-        f"ε={epsilon:.3g} m2/s3; Re={Re:.3g}; We={We:.3g}; Ca={Ca:.3g}; Oh={Oh:.3g}; "
-        f"coalescence_risk={risk:.2f}. Chen 2023 analogue: size falls with shear rate."
+        f"d_Hinze={m_to_um(d_h):.0f} um; d_Grace={m_to_um(d_g):.0f} um; "
+        f"nominal cured diameter approximately {round_um(d_um)} um "
+        f"(raw {d_um:.1f} um; do not quote extra digits). "
+        f"ε={epsilon:.3g} m2/s3 (turb fraction {inp.turb_dissipation_fraction:g}, ASSUMED); "
+        f"Re={Re:.2g}; We={We:.2g}; Ca={Ca:.2g}; Oh={Oh:.2g}; "
+        f"coalescence_risk={risk:.2f} (heuristic, ASSUMED_FOR_SENSITIVITY). "
+        "Chen 2023 analogue: size falls with shear rate."
     )
     return DropletResult(
         d_hinze_m=d_h,
         d_grace_m=d_g,
         d32_m=d32,
         d_particle_m=d_p,
-        d_particle_um=m_to_um(d_p),
+        d_particle_um=d_um,
         Re=Re,
         We=We,
         Ca=Ca,
@@ -164,6 +175,9 @@ def evaluate_droplets(inp: DropletInputs) -> DropletResult:
         status=status,
         provenance=Provenance.MODEL_PREDICTION,
         notes=notes,
+        d_particle_um_nominal=round_um(d_um),
+        epsilon=epsilon,
+        turb_dissipation_fraction=inp.turb_dissipation_fraction,
     )
 
 
@@ -182,3 +196,67 @@ def lognormal_diameters(
     # with median slightly below d32.
     med = d32_m * np.exp(-0.5 * sigma_ln**2)
     return rng.lognormal(mean=np.log(med), sigma=sigma_ln, size=n)
+
+
+def diameter_sensitivity(
+    base: DropletInputs | None = None,
+) -> dict[str, float | str]:
+    """Sensitivity of cured diameter to Hinze C, dissipation fraction, shear, IFT, λ.
+
+    Returns a predicted range. Do not quote a 12-digit micrometre value.
+    """
+    b = base or DropletInputs(
+        temperature_C=70.0,
+        sigma_N_m=0.004,
+        shear_rate_1_s=400.0,
+        velocity_m_s=1.5,
+        length_m=0.05,
+        phi=0.15,
+    )
+    samples: list[float] = []
+    hinze_Cs = [0.40, 0.50, 0.55, 0.65, 0.80]
+    turb_fracs = [0.005, 0.01, 0.02, 0.05, 0.10]
+    shears = [200.0, 400.0, 800.0]
+    ifts = [0.003, 0.004, 0.006]
+    # Viscosity ratio via temperature (water/DCPD both T-dependent).
+    temps = [50.0, 60.0, 70.0, 80.0]
+    for C in hinze_Cs:
+        for f in turb_fracs:
+            for g in shears:
+                for s in ifts:
+                    for T in temps:
+                        r = evaluate_droplets(
+                            DropletInputs(
+                                temperature_C=T,
+                                sigma_N_m=s,
+                                shear_rate_1_s=g,
+                                velocity_m_s=b.velocity_m_s,
+                                length_m=b.length_m,
+                                phi=b.phi,
+                                hinze_C=C,
+                                shrinkage=b.shrinkage,
+                                turb_dissipation_fraction=f,
+                            )
+                        )
+                        samples.append(r.d_particle_um)
+    arr = np.asarray(samples, dtype=float)
+    nom = evaluate_droplets(b)
+    return {
+        "nominal_raw_um": float(nom.d_particle_um),
+        "nominal_rounded_um": float(nom.d_particle_um_nominal),
+        "n_samples": float(arr.size),
+        "d_min_um": float(arr.min()),
+        "d_p10_um": float(np.percentile(arr, 10)),
+        "d_p50_um": float(np.percentile(arr, 50)),
+        "d_p90_um": float(np.percentile(arr, 90)),
+        "d_max_um": float(arr.max()),
+        "reviewer_range_um": (
+            f"approximately {round_um(float(np.percentile(arr, 10)))}-"
+            f"{round_um(float(np.percentile(arr, 90)))} um "
+            f"(nominal approximately {nom.d_particle_um_nominal} um)"
+        ),
+        "notes": (
+            "Range from Hinze C 0.40-0.80, turb dissipation fraction 0.005-0.10, "
+            "shear 200-800 1/s, IFT 3-6 mN/m, T 50-80 C. Assumed dissipation structure."
+        ),
+    }

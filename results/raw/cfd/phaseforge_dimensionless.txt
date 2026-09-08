@@ -1,0 +1,11 @@
+PhaseForge 2D channel intended dimensionless groups (from case properties).
+These are NOT experimental measurements and are NOT a substitute for a solved field.
+Re=150
+We=0.375
+Ca=0.0125
+U_m_s=0.05
+L_m=0.003
+d_drop_m=0.0006
+sigma_N_m=0.004
+mu_cP=1
+ift_mN_m=4

@@ -55,4 +55,4 @@ Chen-type epoxy mixtures are the strongest **particle-formation analogue**, but 
 
 ## 6. The 150 °C problem (central)
 
-Madbouly’s Ea and 55 °C anchor imply uninhibited t_gel on the order of **seconds** at 150 °C. Hu’s inhibited system is already ~2 min at 80 °C. Therefore a 25–75 min window at 150 °C is **not** supported by published Ru/phosphite isothermal data. Highly latent Mo NHC catalysts have DSC onsets up to 140 °C; that is **not** the same as a 50 min isothermal hold at 150 °C. The HPHT point is FAIL or UNKNOWN, not PASS.
+Madbouly’s Ea and 55 °C anchor imply uninhibited t_gel on the order of **seconds** at 150 °C. Hu’s inhibited system is already ~2 min at 80 °C. Therefore a 25–75 min window at 150 °C is **not** supported by published Ru/phosphite isothermal data. Highly latent Mo NHC catalysts (Elser 2018; Momin 2021) have DSC onsets approximately 52–142 °C and exotherm maxima to approximately 174–183 °C; that is **not** the same as a 50 min isothermal hold at 150 °C. PhaseForge-HT is an **UNKNOWN** pathway, not a PASS. The Ru/phosphite HPHT point is FAIL (kinetics) / UNKNOWN (mechanics).

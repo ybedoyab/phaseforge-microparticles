@@ -38,6 +38,11 @@ simulations/cfd/**/log.*
 results/raw/cfd/**
 !results/raw/cfd/.gitkeep
 !results/raw/cfd/docker_unavailable.txt
+!results/raw/cfd/cfd_check.log
+!results/raw/cfd/cfd_status.txt
+!results/raw/cfd/cfd_status.json
+!results/raw/cfd/phaseforge_dimensionless.txt
+!results/raw/cfd/phaseforge_fields_note.txt
 *.OpenFOAM
 *.foam
 

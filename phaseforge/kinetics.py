@@ -19,6 +19,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from phaseforge.ht_catalyst import CATALYST_MO_LATENT, evaluate_ht_family
 from phaseforge.provenance import (
     EvidenceClass,
     Provenance,
@@ -29,6 +30,8 @@ from phaseforge.provenance import (
 )
 from phaseforge.requirements import classify_transform_time_s
 from phaseforge.units import R_GAS, C_to_K
+
+CATALYST_RU_PHOSPHITE = "ru_phosphite"
 
 # Madbouly et al., ACS Omega 2025, 10, 63359-63368. Open via ACS / PMC.
 # tgel = 19.7 min at 55 C, 0.04 wt% Grubbs II. Ea = 79.3 ± 1.0 kJ/mol.
@@ -132,6 +135,7 @@ class KineticsInputs:
     t_solid_over_gel: float = T_SOLID_OVER_GEL.value
     alpha_gel: float = ALPHA_GEL
     alpha_solid: float = ALPHA_SOLID
+    catalyst_family: str = CATALYST_RU_PHOSPHITE
 
 
 @dataclass(frozen=True, slots=True)
@@ -233,6 +237,20 @@ def extrapolation_flag(temperature_C: float) -> str:
 
 
 def evaluate_kinetics(inp: KineticsInputs) -> KineticsResult:
+    if inp.catalyst_family == CATALYST_MO_LATENT:
+        ht = evaluate_ht_family()
+        return KineticsResult(
+            t_gel_s=float("nan"),
+            t_solid_s=float("nan"),
+            t_transform_s=float("nan"),
+            t_transform_min=float("nan"),
+            status=RequirementStatus.UNKNOWN,
+            extrapolation_flag="dsc_onset_not_isothermal_latency",
+            provenance=ht.provenance,
+            notes=ht.notes,
+            alpha_gel=inp.alpha_gel,
+            alpha_solid=inp.alpha_solid,
+        )
     t_gel = arrhenius_tgel_s(inp)
     t_solid = t_gel * inp.t_solid_over_gel
     t_transform = t_solid  # load-bearing criterion

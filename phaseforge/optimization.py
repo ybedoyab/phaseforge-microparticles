@@ -24,25 +24,29 @@ class Envelope:
 
 
 def _score(r: CoupledResult) -> float:
-    """Higher is better. FAIL and UNKNOWN are heavily penalized."""
-    if r.overall == RequirementStatus.FAIL:
+    """Higher is better. FAIL is heavily penalized. Uses core_overall (physics).
+
+    Agglomeration heuristic and unvalidated k_rel do not award a PASS bonus.
+    coalescence_risk is kept as a comparative (lower is better) metric.
+    """
+    if r.core_overall == RequirementStatus.FAIL or r.overall == RequirementStatus.FAIL:
         return -1.0e3
     bonus = 0.0
-    if r.overall == RequirementStatus.PASS:
+    if r.core_overall == RequirementStatus.PASS:
         bonus += 50.0
-    elif r.overall == RequirementStatus.MARGINAL:
+    elif r.core_overall == RequirementStatus.MARGINAL:
         bonus += 10.0
-    elif r.overall == RequirementStatus.UNKNOWN:
+    elif r.core_overall == RequirementStatus.UNKNOWN:
         bonus -= 20.0
-    # Margins
     mu_m = max(0.0, 10.0 - r.viscosity.mu_eff_cP)
     t = r.kinetics.t_transform_min
-    t_m = max(0.0, min(t - 25.0, 75.0 - t))
+    t_m = max(0.0, min(t - 25.0, 75.0 - t)) if t == t else 0.0
     d = r.droplets.d_particle_um
     d_m = max(0.0, min(d - 70.0, 600.0 - d)) / 100.0
     sf_m = max(0.0, r.mechanics.SF - 1.0)
     k_m = max(0.0, r.permeability.porosity - 0.2)
-    return bonus + 2.0 * mu_m + 0.4 * t_m + d_m + 8.0 * sf_m + 10.0 * k_m
+    agg_m = max(0.0, 0.60 - r.droplets.coalescence_risk) * 5.0
+    return bonus + 2.0 * mu_m + 0.4 * t_m + d_m + 8.0 * sf_m + 10.0 * k_m + agg_m
 
 
 def grid_search(seed: int = 42) -> list[CoupledResult]:

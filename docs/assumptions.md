@@ -37,22 +37,29 @@ This file lists assumptions that affect feasibility conclusions.
 ## Droplets
 
 - Hinze C = 0.55 (literature-typical, UQ 0.4–0.8).
-- Dissipation = max(shear estimate, 0.05 U³/L).
+- Dissipation = max(shear estimate, **turb_fraction × U³/L**) with turb_fraction = 0.02 (ASSUMED_FOR_SENSITIVITY). Sensitivity spans 0.005–0.10.
 - Shrinkage = 3% (ASSUMED).
-- Coalescence risk is a 0–1 score, not a measured rate.
+- Coalescence risk is a 0–1 score, not a measured rate. **Heuristic low risk cannot independently PASS** the agglomeration requirement (MARGINAL unless validated). High-T sticky cure is UNKNOWN.
 
 ## Mechanics
 
 - Room-temperature compressive strength 78 MPa (PMC12566568, unreinforced pDCPD).
 - Strength retention falls toward 0.05 at Tg. This is a scenario function, **not** a measured 150 °C crush curve.
 - Particle vs bulk coupon discount 0.75 (ASSUMED).
-- If T ≥ Tg − 20 °C, status is UNKNOWN even if SF > 1.
+- If T ≥ Tg − 20 °C or T ≥ 140 °C, status is UNKNOWN even if SF > 1.
+- 98 °C analogue: US11377580B2 Table 3 bulk yields about 33–50 MPa (patent examples, not PhaseForge).
 
 ## Permeability
 
-- Distributed particles: Maxwell-like obstruction in a high-k channel (relative metric).
-- Settled pack: Kozeny–Carman with packing 0.55–0.64.
-- Fracture geometry of the Seeker application is unknown; absolute mD values are scenario estimates.
+- **A.** Geometric connectivity / continuous-phase availability (1−φ if distributed).
+- **B.** Analytical k: Kozeny–Carman (settled) or dilute obstruction vs **assumed** k_open = 1e-8 m² (ASSUMED_FOR_SENSITIVITY). `k_rel` is not experimental conductivity.
+- **C.** Conductivity under closure stress is unvalidated for PhaseForge → status **MARGINAL** unless disconnected (FAIL).
+- Fracture geometry of the Seeker application is unknown.
+
+## PhaseForge-HT
+
+- Mo latent DSC onsets (Elser 2018, Momin 2021) are **not** converted into isothermal 25–75 min times.
+- Status remains UNKNOWN. No latency multiplier is used to force a 150 °C PASS.
 
 ## Integrity rule
 

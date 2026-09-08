@@ -13,12 +13,15 @@ This is a technical landscape map for a computational proof-of-concept. It is **
 | DCPD/TriCPD downhole ROMP | US11377580B2 and Hu JPSE | **High overlap** on monomer family, latent phosphite, in-situ polymer, fracturing pillars | Patent emphasizes **pillars/plugs/lost circulation** and sequential polymerizable-composition + spacer stages more than a surfactant-stabilized **microparticle** size window |
 | pDCPD suspension beads | Della Martina 2005 | Droplets as microreactors | Lab beads, not HPHT fracturing fluid; often porogen/extraction |
 | Delayed ROMP catalysts | Kordes/Buchmeiser latent Mo/Ru | Latency toolkit | Not demonstrated as brine-dispersed 70–600 μm particles at 150 °C |
+| PhaseForge-HT Mo NHC | Elser 2018; Momin 2021 | DSC-tunable DCPD onset ~52–142 °C | DSC onset is not 25–75 min isothermal at 150 °C; family status UNKNOWN |
 
 ## US11377580B2 — flag, do not ignore
 
 The patent (Schlumberger) covers methods of introducing a polymerizable polycyclic composition (including DCPD and DCPD/TriCPD) with a catalyst into a subterranean formation and polymerizing in situ to form high-Tg polymer, including fracturing treatments that generate **solid polymer pillars** with Tg at least 200 °F, emulsions/foams/slurries, and phosphite-modified latency.
 
 **Strong overlap:** DCPD/TriCPD + ROMP + downhole + delayed gel + load-bearing polymer in fractures.
+
+Table 3 analogue (patent experimental examples, **not** PhaseForge measurements): at a 50 °C reaction condition, no phosphite ≈ 88 MPa RT / 47 MPa at 98 °C; phosphite:M2 ≈ 1:1 ≈ 82 MPa RT / 50 MPa at 98 °C; at 80 °C one delayed formulation ≈ 73 MPa RT / 33 MPa at 98 °C (other formulations lower at high T). 70/30 DCPD/TriCPD is reported stronger than pure pDCPD at RT and 98 °C. 33 MPa is below 41 MPa (6000 psi).
 
 **Plausible technical distinctions (still not a legal conclusion):**
 

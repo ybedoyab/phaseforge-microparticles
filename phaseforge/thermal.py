@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from phaseforge.ht_catalyst import CATALYST_MO_LATENT
 from phaseforge.kinetics import ALPHA_GEL, HR_J_KG, KineticsInputs, arrhenius_tgel_s
 from phaseforge.provenance import Provenance, RequirementStatus
 from phaseforge.units import C_to_K, um_to_m
@@ -64,6 +65,22 @@ def adiabatic_delta_T(Hr_J_kg: float = HR_J_KG.value, Cp: float = CP_J_KG_K) -> 
 
 def simulate_droplet(inp: ThermalInputs) -> ThermalResult:
     kin = inp.kinetics or KineticsInputs(temperature_C=inp.T_cont_C)
+    if kin.catalyst_family == CATALYST_MO_LATENT:
+        return ThermalResult(
+            T_max_C=inp.T_cont_C,
+            dT_max_K=0.0,
+            t_to_Tmax_s=float("nan"),
+            runaway=False,
+            premature_vs_isothermal=False,
+            t_solid_isothermal_s=float("nan"),
+            t_solid_nonisothermal_s=None,
+            status=RequirementStatus.UNKNOWN,
+            provenance=Provenance.ASSUMED_FOR_SENSITIVITY,
+            notes=(
+                "PhaseForge-HT: droplet thermal integration is not run from the "
+                "Ru/phosphite Arrhenius law. DSC onset is not an isothermal heat-release schedule."
+            ),
+        )
     d = inp.diameter_m
     R = d / 2.0
     V = 4.0 / 3.0 * np.pi * R**3
@@ -96,6 +113,7 @@ def simulate_droplet(inp: ThermalInputs) -> ThermalResult:
             catalyst_order_n=kin.catalyst_order_n,
             latency_extra=kin.latency_extra,
             t_solid_over_gel=kin.t_solid_over_gel,
+            catalyst_family=kin.catalyst_family,
         )
         t_gel = max(arrhenius_tgel_s(kin_T), 1e-3)
         if alpha >= 0.999:

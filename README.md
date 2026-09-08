@@ -50,10 +50,13 @@ Headline files:
 
 **Expected qualitative outcome (models, not experiments):**
 
-- A plausible window exists at **moderate temperature (~45–70 °C)** with latent ROMP and φ ~ 0.1–0.2: viscosity PASS, delay tunable into 25–75 min, size order-of-magnitude in range, RT-derated mechanics PASS/MARGINAL, pathways open if droplets stay isolated.
-- At **150 °C**, published Ru/phosphite gel times extrapolate **far below** 25 min (FAIL/UNKNOWN). Mechanical integrity is **UNKNOWN** because 150 °C sits near typical pDCPD Tg (140–165 °C).
+- A plausible **core-physics** window exists at **moderate temperature (~50–70 °C)** with latent Ru/phosphite ROMP and φ ~ 0.1–0.2: viscosity PASS, delay tunable into 25–75 min, size **approximately 270 μm** (range, not 273.046 μm), RT-derated mechanics PASS candidate.
+- Agglomeration and fracture conductivity are **MARGINAL** (heuristics / unvalidated). They do not independently PASS.
+- At **150 °C**, published Ru/phosphite gel times extrapolate **far below** 25 min (**FAIL**). Mechanical integrity is **UNKNOWN** (near pDCPD Tg).
+- **PhaseForge-HT** (Mo latent precatalysts) is a separate **UNKNOWN** pathway (DSC onsets ~52–142 °C ≠ isothermal 25–75 min at 150 °C).
+- R03 upper-temperature capability of exact PhaseForge remains **UNKNOWN**; a 70 °C candidate does not close “up to ~150 °C.”
 
-Do not read this as “TRL 3 achieved.”
+Do not read this as “TRL 3 achieved.” See `docs/final_submission_claims.md`.
 
 ## Representative figures
 
@@ -64,6 +67,8 @@ Generated under `figures/` (PNG ≥300 dpi, SVG, PDF):
 - `06_viscosity_design_map*`
 - `10_coupled_feasible_window*`
 - `11_monte_carlo_compliance*`
+- `15_diameter_uncertainty*`
+- `16_phaseforge_ht_onset*`
 
 ## Limitations
 

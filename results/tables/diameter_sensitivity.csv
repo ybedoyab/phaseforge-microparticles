@@ -1,0 +1,2 @@
+nominal_raw_um,nominal_rounded_um,n_samples,d_min_um,d_p10_um,d_p50_um,d_p90_um,d_max_um,reviewer_range_um,notes
+273.0466868420546,270.0,900.0,87.77745185502512,137.64429303648603,275.28858607297207,551.2174757678075,881.947961228492,approximately 140-550 um (nominal approximately 270 um),"Range from Hinze C 0.40-0.80, turb dissipation fraction 0.005-0.10, shear 200-800 1/s, IFT 3-6 mN/m, T 50-80 C. Assumed dissipation structure."

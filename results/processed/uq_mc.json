@@ -6,10 +6,13 @@
     "transform_time": 0.3025,
     "diameter": 1.0,
     "mechanics": 0.5775,
-    "open_pathways": 1.0,
+    "open_pathways": 0.0,
+    "open_pathways_not_fail": 1.0,
     "thermal": 1.0,
-    "agglomeration": 0.8675,
-    "overall_pass": 0.155,
+    "agglomeration": 0.0,
+    "agglomeration_not_fail": 0.9925,
+    "core_pass": 0.18,
+    "overall_pass": 0.0,
     "overall_not_fail": 0.4075
   },
   "method": "latin_hypercube"

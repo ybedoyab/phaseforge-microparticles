@@ -1,11 +1,43 @@
-Docker Desktop engine was not running at audit time (2026-09-08).
+Docker CLI is present but the engine is not reachable (Desktop Linux engine pipe/socket missing).
+Client:
+ Version:    27.4.0
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  ai: Ask Gordon - Docker Agent (Docker Inc.)
+    Version:  v0.5.1
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-ai.exe
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.19.2-desktop.1
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-buildx.exe
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.31.0-desktop.2
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-compose.exe
+  debug: Get a shell into any image or container (Docker Inc.)
+    Version:  0.0.37
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-debug.exe
+  desktop: Docker Desktop commands (Beta) (Docker Inc.)
+    Version:  v0.1.0
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-desktop.exe
+  dev: Docker Dev Environments (Docker Inc.)
+    Version:  v0.1.2
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-dev.exe
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.27
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-extension.exe
+  feedback: Provide feedback, right in your terminal! (Docker Inc.)
+    Version:  v1.0.5
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-feedback.exe
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.4.0
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-init.exe
+  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc.)
+    Version:  0.6.0
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-sbom.exe
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.15.1
+    Path:     C:\Users\yulcr\.docker\cli-plugins\docker-scout.exe
 
-CLI present: Docker 27.4.0, Compose v2.31.0-desktop.2
-Error: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-
-GeoChemFoam image jcmaes/geochemfoam-5.2 was NOT pulled.
-No official tutorial was executed.
-No custom PhaseForge CFD case was run.
-
-Python analytical POC is complete independently of CFD.
-Manual action required to run CFD: start Docker Desktop, then `bash scripts/run_cfd.sh --check`.
+Server:
+ERROR: error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.47/info": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+errors pretty printing info
