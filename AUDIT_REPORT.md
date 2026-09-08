@@ -14,7 +14,7 @@ This project did **not** physically perform PhaseForge laboratory experiments.
 | Docker CLI | 27.4.0 |
 | Docker engine | Not rerun this pass (existing solved CFD reused) |
 | GeoChemFoam image | `jcmaes/geochemfoam-5.2` (OpenFOAM **v2212**) |
-| GitHub Actions | Verify after this push; do not substitute local pytest |
+| GitHub Actions | **success** — https://github.com/ybedoyab/phaseforge-microparticles/actions/runs/34247600142 |
 
 Details: `docs/environment_audit.md`.
 
