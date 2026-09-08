@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="320" viewBox="0 0 1100 320">
+  <rect width="1100" height="320" fill="white"/>
+  <text x="24" y="28" font-size="16" font-family="Segoe UI, Arial">PhaseForge proposed mechanism — not experimental photography</text>
+  <g font-family="Segoe UI, Arial" font-size="12" text-anchor="middle">
+    <circle cx="90" cy="160" r="62" fill="#deebf7" stroke="#1f4e79" stroke-width="2"/>
+    <text x="90" y="156">Aqueous</text><text x="90" y="172">carrier ≤10 cP</text>
+    <circle cx="270" cy="160" r="62" fill="#fff2cc" stroke="#1f4e79" stroke-width="2"/>
+    <text x="270" y="148">DCPD-rich</text><text x="270" y="164">droplets</text><text x="270" y="180">microreactors</text>
+    <circle cx="450" cy="160" r="62" fill="#fce4d6" stroke="#1f4e79" stroke-width="2"/>
+    <text x="450" y="148">HPHT</text><text x="450" y="164">transport</text><text x="450" y="180">latent ROMP</text>
+    <circle cx="630" cy="160" r="62" fill="#f8cbad" stroke="#1f4e79" stroke-width="2"/>
+    <text x="630" y="148">Latency</text><text x="630" y="164">expires</text><text x="630" y="180">in-drop ROMP</text>
+    <circle cx="810" cy="160" r="62" fill="#c6efce" stroke="#1f4e79" stroke-width="2"/>
+    <text x="810" y="148">Discrete</text><text x="810" y="164">70–600 μm</text><text x="810" y="180">particles</text>
+    <circle cx="990" cy="160" r="62" fill="#c5e0b4" stroke="#1f4e79" stroke-width="2"/>
+    <text x="990" y="148">Open</text><text x="990" y="164">flow paths</text><text x="990" y="180">around pack</text>
+    <path d="M152 160 H208" stroke="#c45911" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M332 160 H388" stroke="#c45911" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M512 160 H568" stroke="#c45911" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M692 160 H748" stroke="#c45911" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M872 160 H928" stroke="#c45911" stroke-width="3" marker-end="url(#a)"/>
+  </g>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c45911"/></marker></defs>
+  <text x="24" y="300" font-size="11" font-family="Segoe UI, Arial">Original schematic. No copyrighted figures were copied.</text>
+</svg>

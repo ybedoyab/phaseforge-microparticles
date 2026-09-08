@@ -1,0 +1,11 @@
+Docker Desktop engine was not running at audit time (2026-09-08).
+
+CLI present: Docker 27.4.0, Compose v2.31.0-desktop.2
+Error: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+GeoChemFoam image jcmaes/geochemfoam-5.2 was NOT pulled.
+No official tutorial was executed.
+No custom PhaseForge CFD case was run.
+
+Python analytical POC is complete independently of CFD.
+Manual action required to run CFD: start Docker Desktop, then `bash scripts/run_cfd.sh --check`.

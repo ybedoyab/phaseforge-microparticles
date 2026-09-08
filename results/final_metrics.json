@@ -1,0 +1,75 @@
+{
+  "disclaimer": "Computational predictions and literature analogues. No PhaseForge laboratory experiments were performed in this repository.",
+  "nominal": {
+    "label": "nominal",
+    "overall": "MARGINAL",
+    "mu_eff_cP": 0.6412899230349711,
+    "t_transform_min": 78.40084329658413,
+    "t_gel_min": 43.55602405365785,
+    "d_particle_um": 273.0466868420546,
+    "SF_mech": 1.414117942869614,
+    "porosity": 0.85,
+    "k_rel": 0.7391304347826088,
+    "dT_max_K": 0.0007831511665585822,
+    "coalescence_risk": 0.26887120639818957,
+    "status_viscosity": "PASS",
+    "status_kinetics": "MARGINAL",
+    "status_diameter": "PASS",
+    "status_mechanics": "PASS",
+    "status_permeability": "PASS",
+    "status_thermal": "PASS",
+    "status_agglomeration": "PASS",
+    "kinetics_flag": "inside_calibration_window_40_60C",
+    "mechanics_unknown": false,
+    "notes": "T=60.0 C, \u03c6=0.15, cat=1.0, inh=0.22, latency_extra=1.0. UNKNOWN never upgraded. kinetics_flag=inside_calibration_window_40_60C."
+  },
+  "hpht_150C": {
+    "label": "hpht_no_extra_latency",
+    "overall": "FAIL",
+    "mu_eff_cP": 0.24840076218335058,
+    "t_transform_min": 1.570777374110733,
+    "t_gel_min": 0.872654096728185,
+    "d_particle_um": 273.0466868420546,
+    "SF_mech": 0.33231771657435927,
+    "porosity": 0.85,
+    "k_rel": 0.7391304347826088,
+    "dT_max_K": 0.0390887422366859,
+    "coalescence_risk": 0.2750919534270646,
+    "status_viscosity": "PASS",
+    "status_kinetics": "FAIL",
+    "status_diameter": "PASS",
+    "status_mechanics": "UNKNOWN",
+    "status_permeability": "PASS",
+    "status_thermal": "PASS",
+    "status_agglomeration": "PASS",
+    "kinetics_flag": "severe_extrapolation_beyond_published_isothermal_gel_times",
+    "mechanics_unknown": true,
+    "notes": "T=150.0 C, \u03c6=0.15, cat=0.5, inh=0.95, latency_extra=1.0. UNKNOWN never upgraded. kinetics_flag=severe_extrapolation_beyond_published_isothermal_gel_times."
+  },
+  "uq_40_90C": {
+    "n": 400,
+    "seed": 42,
+    "probabilities": {
+      "viscosity": 1.0,
+      "transform_time": 0.3025,
+      "diameter": 1.0,
+      "mechanics": 0.5775,
+      "open_pathways": 1.0,
+      "thermal": 1.0,
+      "agglomeration": 0.8675,
+      "overall_pass": 0.155,
+      "overall_not_fail": 0.4075
+    },
+    "method": "latin_hypercube"
+  },
+  "units": {
+    "6000_psi_MPa": 41.368543759008,
+    "10_cP_Pa_s": 0.01
+  },
+  "headline": {
+    "question": "Is there a physically plausible operating window?",
+    "answer_40_80C": "MARGINAL",
+    "answer_150C": "FAIL",
+      "notes": "A computationally plausible window exists at moderate temperature (approximately 45-70 C) with latent ROMP and phi~0.1-0.2. At 150 C, published Ru/phosphite gel times extrapolate far below 25 min (FAIL). Mechanical strength at 150 C is near Tg and remains UNKNOWN."
+  }
+}
