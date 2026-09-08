@@ -1,0 +1,142 @@
+# Uncertain parameters for Monte Carlo / LHS / Sobol analysis.
+# Distributions are independent unless noted. Seeds are fixed in code.
+
+seed: 42
+n_samples_mc: 800
+n_samples_sobol: 512
+
+parameters:
+  Ea_J_mol:
+    low: 69300.0
+    high: 89300.0
+    nominal: 79300.0
+    unit: J/mol
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: MADBOULY2025_ACS_OMEGA
+    notes: "79.3 ± 1.0 kJ/mol reported; wider ±10 kJ/mol used for UQ because the 150 C extrapolation is far outside the 40-60 C calibration window."
+
+  tgel_ref_s:
+    low: 900.0
+    high: 1500.0
+    nominal: 1182.0
+    unit: s
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: MADBOULY2025_ACS_OMEGA
+    notes: "tgel = 19.7 min at 55 C and 0.04 wt% Grubbs II."
+
+  catalyst_order_n:
+    low: 1.0
+    high: 1.8
+    nominal: 1.4
+    unit: dimensionless
+    provenance: FITTED
+    source_id: MADBOULY2025_ACS_OMEGA
+    notes: "First-order in catalyst is physically expected; published 50 C gel times 70 min vs 10 min for 0.04 vs 0.12 wt% imply n~1.77."
+
+  inhibitor_factor_max:
+    low: 5.0
+    high: 40.0
+    nominal: 12.0
+    unit: dimensionless
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: HU2018_JPSE
+    notes: "Hu 2018 TPP increased gel time from 5.98 to 38.5 min at 50 C (factor ~6.4). Upper bound is a sensitivity envelope, not a 150 C measurement."
+
+  latency_extra_150C:
+    low: 1.0
+    high: 3000.0
+    nominal: 1.0
+    unit: dimensionless
+    provenance: ASSUMED_FOR_SENSITIVITY
+    notes: "Additional isothermal latency at 150 C beyond Arrhenius extrapolation. Nominal=1 means no extra latency (published-chemistry extrapolation). High values represent hypothetical latent Mo/Ru precatalysts."
+
+  mu_cont_20C_Pa_s:
+    low: 0.0008
+    high: 0.0020
+    nominal: 0.0010
+    unit: Pa s
+    provenance: PUBLISHED_EXPERIMENTAL
+    notes: "Water ~1 cP at 20 C; brine slightly higher."
+
+  mu_disp_20C_Pa_s:
+    low: 0.0007
+    high: 0.0030
+    nominal: 0.0010
+    unit: Pa s
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: MADBOULY2025_ACS_OMEGA
+    notes: "DCPD viscosity 1.0 mPa s at 20 C."
+
+  sigma_N_m:
+    low: 0.002
+    high: 0.020
+    nominal: 0.004
+    unit: N/m
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: YANG2026_JAPS
+    notes: "Yang 2026 analogue IFT window 3.2-4.5 mN/m; broader UQ range includes poorly stabilized interfaces."
+
+  hinze_C:
+    low: 0.4
+    high: 0.8
+    nominal: 0.55
+    unit: dimensionless
+    provenance: PUBLISHED_EXPERIMENTAL
+    notes: "Hinze 1955 Kolmogorov-Hinze prefactor typically ~0.5-0.7 for dmax."
+
+  shrinkage:
+    low: 0.0
+    high: 0.08
+    nominal: 0.03
+    unit: dimensionless
+    provenance: ASSUMED_FOR_SENSITIVITY
+    notes: "Linear shrinkage from droplet to cured particle. Epoxy ISP literature cites low shrinkage as an advantage; DCPD volumetric shrinkage is not used as a fitted PhaseForge measurement."
+
+  Tg_C:
+    low: 139.0
+    high: 210.0
+    nominal: 155.0
+    unit: degC
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: KOVACIC2020_MCF
+    notes: "Typical crosslinked pDCPD Tg 140-165 C; >200 C reported after extended post-cure. Patent US11377580B2 claims high-Tg DCPD/TriCPD."
+
+  sigma_c_RT_MPa:
+    low: 50.0
+    high: 95.0
+    nominal: 78.0
+    unit: MPa
+    provenance: PUBLISHED_EXPERIMENTAL
+    source_id: PMC12566568
+    notes: "Unreinforced pDCPD compressive strength 78.0 MPa at ~23 C. Yang 2026 DCPD-modified resin 95 MPa. Lower bound conservative."
+
+  packing_fraction:
+    low: 0.55
+    high: 0.64
+    nominal: 0.60
+    unit: dimensionless
+    provenance: PUBLISHED_EXPERIMENTAL
+    notes: "Random loose to random close packing of spheres."
+
+  phi_dispersed:
+    low: 0.05
+    high: 0.30
+    nominal: 0.15
+    unit: dimensionless
+    provenance: ASSUMED_FOR_SENSITIVITY
+    notes: "Engineering design variable, not a measured formulation."
+
+  temperature_C:
+    low: 40.0
+    high: 150.0
+    nominal: 60.0
+    unit: degC
+    provenance: ASSUMED_FOR_SENSITIVITY
+    notes: "Operating temperature. Challenge transport bound is 150 C."
+
+  coalescence_risk_scale:
+    low: 0.5
+    high: 2.0
+    nominal: 1.0
+    unit: dimensionless
+    provenance: ASSUMED_FOR_SENSITIVITY

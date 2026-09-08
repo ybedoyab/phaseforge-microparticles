@@ -1,0 +1,96 @@
+# Engineering-level baseline candidate. This is NOT a laboratory recipe.
+# Exact catalyst identities, inhibitor dosages, and surfactant grades are
+# intentionally left as ranges because PhaseForge has not been formulated
+# experimentally in this project.
+
+concept:
+  name: PhaseForge
+  family: thermally_latent_DCPD_rich_droplet_microreactors
+  description: >
+    Aqueous/brine continuous carrier containing low-viscosity DCPD or
+    DCPD/TriCPD-rich droplets that behave as isolated microreactors.
+    A thermally latent ROMP mechanism delays polymerization during
+    transport and then solidifies individual droplets into pDCPD-family
+    microparticles after a programmed delay.
+
+alternative_candidate:
+  name: epoxy_or_modified_resin_ISP
+  family: liquid_solid_phase_change_autogenous_proppant
+  description: >
+    Literature analogue (Chen 2022/2023; Bai 2025; Yang 2026): bisphenol-A
+    epoxy or DCPD-modified unsaturated polyester dispersed in surfactant
+    water, thermally cured into spherical particles.
+  viscosity_limitation: >
+    Published mixture viscosities are typically 20-55 mPa s, above the
+    10 cP challenge threshold, unless heavily diluted.
+  source_ids: [CHEN2023_OMEGA, CHEN2022_ENERGIES, BAI2025_IECR, YANG2026_JAPS]
+
+delivery:
+  continuous_phase: aqueous_brine
+  dispersed_phase: DCPD_or_DCPD_TriCPD_rich
+  stabilizer_concept: nonionic_or_polymeric_interface_stabilizer
+  catalyst_concept: thermally_latent_ROMP_precatalyst_plus_optional_inhibitor
+  solids_injected: false
+
+operating_point_nominal:
+  temperature_C: 60.0
+  dispersed_volume_fraction: 0.15
+  catalyst_relative: 1.0   # relative to Madbouly 2025 0.04 wt% Grubbs reference
+  inhibitor_index: 0.22    # 0 = uninhibited published G2; 1 = strong latency
+  interfacial_tension_N_m: 0.004  # 4 mN/m, Yang 2026 analogue range 3.2-4.5 mN/m
+  shear_rate_1_s: 400.0
+  characteristic_velocity_m_s: 1.5
+  channel_width_m: 0.05
+  residence_time_min: 45.0
+  continuous_salinity_wt_pct: 2.0
+
+operating_point_conservative:
+  temperature_C: 50.0
+  dispersed_volume_fraction: 0.10
+  catalyst_relative: 0.8
+  inhibitor_index: 0.18
+  interfacial_tension_N_m: 0.005
+  shear_rate_1_s: 250.0
+  characteristic_velocity_m_s: 1.0
+  channel_width_m: 0.05
+  residence_time_min: 55.0
+
+operating_point_aggressive:
+  temperature_C: 70.0
+  dispersed_volume_fraction: 0.20
+  catalyst_relative: 1.2
+  inhibitor_index: 0.28
+  interfacial_tension_N_m: 0.0035
+  shear_rate_1_s: 800.0
+  characteristic_velocity_m_s: 2.5
+  channel_width_m: 0.05
+  residence_time_min: 35.0
+
+# High-temperature transport case required by the challenge wording.
+# Kinetics at 150 C with published Ru/phosphite systems are predicted FAIL
+# unless a much stronger latency multiplier is assumed.
+operating_point_hpht:
+  temperature_C: 150.0
+  dispersed_volume_fraction: 0.15
+  catalyst_relative: 0.5
+  inhibitor_index: 0.95
+  interfacial_tension_N_m: 0.004
+  shear_rate_1_s: 400.0
+  characteristic_velocity_m_s: 1.5
+  channel_width_m: 0.05
+  residence_time_min: 50.0
+  latency_multiplier_assumed: 2000.0
+  latency_multiplier_provenance: ASSUMED_FOR_SENSITIVITY
+  notes: >
+    The 2000x latency multiplier is NOT a published isothermal 150 C gel time.
+    It is an exploratory assumption representing a hypothetical highly latent
+    precatalyst. Results at this point are UNKNOWN/FAIL unless tagged as assumed.
+
+selection_rationale: >
+  PhaseForge is selected as the primary candidate because DCPD monomer
+  viscosity (~1 cP at 20 C, Madbouly 2025) can meet the <=10 cP delivery
+  constraint more credibly than published epoxy PCL mixtures (33-80 mPa s).
+  Isolated-droplet ROMP is supported by Della Martina bead microreactor
+  literature. High-temperature strength and 150 C latency remain unresolved
+  and require laboratory validation. Preference is computational and
+  analogue-based, not experimental proof of an integrated PhaseForge fluid.

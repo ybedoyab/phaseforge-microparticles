@@ -1,0 +1,168 @@
+"""Packed / distributed microparticles and residual flow pathways.
+
+Baseline: Kozeny-Carman permeability of a granular pack.
+Also: 2D random sequential addition of disks to estimate porosity and
+nearest-neighbor connectivity of the continuous phase.
+
+The challenge requires interconnected open pathways, not a bulk plug.
+If droplets remain isolated at volume fraction φ, the continuous-phase
+area fraction is ~1-φ and flow is around particles. If they settle into
+a pack, porosity is 1-packing_fraction.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+import numpy as np
+
+from phaseforge.provenance import Provenance, RequirementStatus
+
+
+def kozeny_carman(d_m: float, porosity: float, k0: float = 180.0) -> float:
+    """k = φ^3 d^2 / [k0 (1-φ)^2]   (SI: m^2)
+
+    Carman (1937) / Kozeny-Carman packed-bed permeability. k0=180 is the
+    common spherical-particle coefficient.
+    """
+    phi = min(max(porosity, 1e-6), 0.99)
+    return (phi**3) * d_m**2 / (k0 * (1.0 - phi) ** 2)
+
+
+def darcy_pressure_drop(k_m2: float, mu: float, U: float, L: float) -> float:
+    """ΔP = μ U L / k."""
+    return mu * U * L / max(k_m2, 1e-30)
+
+
+def relative_conductivity(k: float, k_ref: float) -> float:
+    return k / max(k_ref, 1e-30)
+
+
+@dataclass(frozen=True, slots=True)
+class PermeabilityInputs:
+    d_m: float
+    phi_particles: float  # particle volume fraction in the fracture
+    packing_fraction: float = 0.60
+    settled: bool = False
+    mu_Pa_s: float = 1.0e-3
+    U_m_s: float = 0.01
+    L_m: float = 1.0
+    polydispersity: float = 1.0  # d90/d10 analogue scale
+
+
+@dataclass(frozen=True, slots=True)
+class PermeabilityResult:
+    porosity: float
+    k_m2: float
+    k_mD: float
+    dP_Pa: float
+    connected: bool
+    k_rel: float
+    status: RequirementStatus
+    provenance: Provenance
+    notes: str
+
+
+def millidarcy(k_m2: float) -> float:
+    return k_m2 / 9.869233e-16
+
+
+def evaluate_permeability(inp: PermeabilityInputs) -> PermeabilityResult:
+    if inp.settled:
+        porosity = 1.0 - inp.packing_fraction
+        # Polydispersity reduces porosity slightly
+        porosity *= 1.0 / (1.0 + 0.15 * max(inp.polydispersity - 1.0, 0.0))
+    else:
+        # Distributed particles occupy φ; continuous phase remains 1-φ
+        porosity = 1.0 - inp.phi_particles
+    k = kozeny_carman(inp.d_m, porosity)
+    # For distributed (non-settled) particles, KC of a pack is conservative
+    # (too low). A dilute obstruction correction: k ~ k_open * (1-φ)/(1+φ)
+    # (Maxwell-like). Use the max of dilute and pack estimates when not settled.
+    k_open = 1.0e-8  # not a fracture permeability prediction; relative only
+    if not inp.settled:
+        k_dilute = k_open * (1.0 - inp.phi_particles) / (1.0 + inp.phi_particles)
+        k_use = k_dilute
+        k_ref = k_open
+    else:
+        k_use = k
+        k_ref = kozeny_carman(inp.d_m, 0.40)
+    dP = darcy_pressure_drop(k_use if inp.settled else max(k_use, k), inp.mu_Pa_s, inp.U_m_s, inp.L_m)
+    connected = porosity > 0.18 and inp.phi_particles < 0.64
+    k_rel = k_use / max(k_ref, 1e-30)
+    if not connected or porosity < 0.12:
+        status = RequirementStatus.FAIL
+    elif k_rel < 0.05 and inp.settled:
+        status = RequirementStatus.MARGINAL
+    else:
+        status = RequirementStatus.PASS
+    notes = (
+        f"settled={inp.settled}; φ_particles={inp.phi_particles:.3f}; "
+        f"porosity={porosity:.3f}; k={k_use:.3e} m2 ({millidarcy(k_use):.3g} mD); "
+        f"connected={connected}. Bulk gel / φ→1 is a FAIL."
+    )
+    return PermeabilityResult(
+        porosity=porosity,
+        k_m2=k_use,
+        k_mD=millidarcy(k_use),
+        dP_Pa=dP,
+        connected=connected,
+        k_rel=float(k_rel),
+        status=status,
+        provenance=Provenance.MODEL_PREDICTION,
+        notes=notes,
+    )
+
+
+def random_disk_pack(
+    n: int,
+    d_m: float,
+    width_m: float,
+    height_m: float,
+    rng: np.random.Generator | None = None,
+    max_tries: int = 50,
+) -> tuple[np.ndarray, float]:
+    """2D random sequential addition. Returns centres (x,y) and void fraction.
+
+    Overlap is rejected. If n cannot be placed, returns as many as fit.
+    """
+    rng = rng or np.random.default_rng(42)
+    r = d_m / 2.0
+    pts: list[tuple[float, float]] = []
+    for _ in range(n * max_tries):
+        if len(pts) >= n:
+            break
+        x = rng.uniform(r, width_m - r)
+        y = rng.uniform(r, height_m - r)
+        ok = True
+        for px, py in pts:
+            if (x - px) ** 2 + (y - py) ** 2 < (2.0 * r) ** 2:
+                ok = False
+                break
+        if ok:
+            pts.append((x, y))
+    arr = np.asarray(pts, dtype=float) if pts else np.zeros((0, 2))
+    area_frac = len(pts) * np.pi * r**2 / (width_m * height_m)
+    void = 1.0 - area_frac
+    return arr, float(void)
+
+
+def connectivity_metric(points: np.ndarray, d_m: float, cutoff: float = 1.5) -> float:
+    """Fraction of particles with at least one neighbor within cutoff*d.
+
+    High values indicate a contacting cluster (agglomeration / percolating solids).
+    """
+    if points.shape[0] < 2:
+        return 0.0
+    thresh = (cutoff * d_m) ** 2
+    n = points.shape[0]
+    has = np.zeros(n, dtype=bool)
+    for i in range(n):
+        d2 = np.sum((points - points[i]) ** 2, axis=1)
+        d2[i] = np.inf
+        has[i] = np.any(d2 < thresh)
+    return float(np.mean(has))
+
+
+def diameter_sweep_um() -> list[float]:
+    return [70.0, 100.0, 200.0, 400.0, 600.0]

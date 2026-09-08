@@ -1,0 +1,201 @@
+# Innocentive challenge acceptance criteria encoded as machine-readable
+# requirements. Source: public challenge page retrieved 2026-09-08.
+#
+# Challenge: Controlled Formation of Mechanically Functional Microparticles
+# from a Fluid System
+# URL: https://www.innocentive.com/challenges/controlled-formation-of-mechanically-functional-microparticles-from-a-fluid-system/
+#
+# Status logic used by phaseforge.coupled:
+#   PASS      — predicted value meets the stated threshold
+#   MARGINAL  — within a documented tolerance of the threshold
+#   FAIL      — outside the threshold and tolerance
+#   UNKNOWN   — insufficient evidence; NEVER upgraded to PASS
+#
+# All SI conversions are implemented in phaseforge.units and tested.
+
+challenge:
+  title: Controlled Formation of Mechanically Functional Microparticles from a Fluid System
+  seeker_page: https://www.innocentive.com/challenges/controlled-formation-of-mechanically-functional-microparticles-from-a-fluid-system/
+  due_date: 2026-09-08
+  invited_trl: [3, 4, 5]
+  source_access: public_web_page
+  retrieval_date: 2026-09-08
+
+units:
+  viscosity: {internal: Pa_s, display: cP, conversion: "1 cP = 0.001 Pa s"}
+  pressure: {internal: Pa, display: psi, conversion: "1 psi = 6894.757293168 Pa"}
+  length: {internal: m, display: um, conversion: "1 um = 1e-6 m"}
+  temperature: {internal: K, display: degC, conversion: "T_K = T_C + 273.15"}
+  time: {internal: s, display: min, conversion: "1 min = 60 s"}
+
+requirements:
+  R01_liquid_delivery:
+    statement: Initial/delivery system is a liquid.
+    metric: is_liquid_at_delivery
+    pass_if: true
+    fail_if: false
+    source: Innocentive challenge page, Transport / Delivery Phase
+    models: [viscosity, coupled]
+    notes: "PhaseForge baseline is an aqueous continuous phase plus a DCPD-rich dispersed liquid. No solids injected."
+
+  R02_viscosity:
+    statement: Apparent viscosity <= 10 cP
+    metric: mu_eff
+    unit: cP
+    si_unit: Pa_s
+    threshold: 10.0
+    comparison: "<="
+    marginal_threshold: 12.0
+    source: Innocentive challenge page, Transport / Delivery Phase
+    models: [viscosity, coupled]
+    notes: "Evaluate at delivery temperature. Emulsion effective viscosity, not only the continuous-phase viscosity."
+
+  R03_transport_temperature:
+    statement: Operate under temperatures up to approximately 150 C (300 F)
+    metric: T_transport_max
+    unit: degC
+    threshold: 150.0
+    comparison: ">="
+    source: Innocentive challenge page, Transport / Delivery Phase
+    models: [kinetics, thermal, mechanics, coupled]
+    notes: "Upper operating bound, not a requirement that every candidate must be at 150 C. Latency at 150 C is a separate feasibility question."
+
+  R04_transport_pressure:
+    statement: Pressures up to approximately 10,000 psi during transport
+    metric: P_transport
+    unit: psi
+    si_unit: Pa
+    threshold: 10000.0
+    threshold_MPa: 68.94757293168
+    comparison: "survive_or_remain_liquid"
+    source: Innocentive challenge page, Transport / Delivery Phase
+    models: [coupled]
+    notes: "Liquid compressibility of water/DCPD is modest; no published evidence that 10,000 psi prevents ROMP. Pressure effects on kinetics remain UNKNOWN."
+
+  R05_post_transform_pressure:
+    statement: Approximately 6,000 psi after transformation
+    metric: P_post
+    unit: psi
+    threshold: 6000.0
+    threshold_MPa: 41.368543759
+    source: Innocentive challenge page, Transport / Delivery Phase
+    models: [mechanics, permeability, coupled]
+
+  R06_controlled_activation:
+    statement: Predictable controlled transformation after delivery
+    metric: controlled_activation
+    pass_if: true
+    activation_modes: [temperature, time_delay, catalyst, chemical_environment]
+    source: Innocentive challenge page, Controlled Transformation
+    models: [kinetics, thermal, coupled]
+    notes: "PhaseForge uses thermally latent ROMP plus optional inhibitor. Pressure and pH activation are not claimed as primary."
+
+  R07_transformation_window:
+    statement: Desired transformation window approximately 25-75 minutes after pumping
+    metric: t_transform
+    unit: min
+    si_unit: s
+    threshold_min: 25.0
+    threshold_max: 75.0
+    marginal_min: 15.0
+    marginal_max: 85.0
+    source: Innocentive challenge page, Controlled Transformation
+    models: [kinetics, thermal, coupled]
+    notes: "Gel time is not treated as complete solidification. Separate alpha_gel and alpha_solid criteria are used."
+
+  R08_discrete_particles:
+    statement: Discrete microparticles, not gels or bulk solids
+    metric: discrete_particles
+    pass_if: true
+    fail_if_bulk_gel: true
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [droplets, permeability, coupled]
+
+  R09_particle_size:
+    statement: Size in the range of approximately 70-600 microns
+    metric: d_particle
+    unit: um
+    si_unit: m
+    threshold_min: 70.0
+    threshold_max: 600.0
+    marginal_min: 50.0
+    marginal_max: 800.0
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [droplets, coupled]
+
+  R10_sphericity:
+    statement: Spherical or near-spherical morphology where applicable
+    metric: sphericity
+    threshold_min: 0.8
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [droplets, coupled]
+    notes: "Predicted from interfacial-energy argument and analogous emulsified-resin ISP literature, not from PhaseForge experiments."
+
+  R11_minimal_adhesion:
+    statement: Minimal inter-particle adhesion or agglomeration
+    metric: agglomeration_risk
+    pass_if: "low"
+    fail_if: "high"
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [droplets, thermal, coupled]
+    notes: "Coalescence and sticky-cure contact are modelled as risk scores. Direct experimental adhesion data for PhaseForge do not exist."
+
+  R12_load_bearing:
+    statement: Load-bearing mechanical strength
+    metric: load_bearing
+    pass_if: true
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [mechanics, coupled]
+
+  R13_compressive_integrity:
+    statement: Maintain integrity under compressive stresses approximately 4500-6000 psi
+    metric: SF_mech
+    unit: dimensionless
+    stress_min_psi: 4500.0
+    stress_max_psi: 6000.0
+    stress_min_MPa: 31.026407819
+    stress_max_MPa: 41.368543759
+    threshold_sf: 1.0
+    pass_sf: 1.25
+    marginal_sf: 1.0
+    source: Innocentive challenge page, Resulting Microparticles
+    models: [mechanics, coupled]
+    notes: "Do not extrapolate room-temperature compressive strength to 150 C without derating. 150 C is near published pDCPD Tg."
+
+  R14_remain_distributed:
+    statement: Remain evenly distributed throughout the target region after formation
+    metric: distributed
+    pass_if: true
+    source: Innocentive challenge page, System-Level Performance
+    models: [droplets, permeability, coupled]
+    notes: "Hydrodynamic placement analogue from liquid-liquid ISP literature; settling after cure is a residual risk."
+
+  R15_open_pathways:
+    statement: Maintain open pathways enabling continued fluid transport
+    metric: open_pathways
+    pass_if: true
+    fail_if_bulk_plug: true
+    source: Innocentive challenge page, System-Level Performance
+    models: [permeability, coupled]
+
+  R16_flow_through_around:
+    statement: Allow fluid to flow through and around the particle assembly
+    metric: k_rel
+    threshold_min: 0.05
+    source: Innocentive challenge page, System-Level Performance
+    models: [permeability, coupled]
+
+  R17_no_bulk_gel:
+    statement: No bulk gel or continuous solid plug
+    metric: bulk_gel
+    pass_if: false
+    source: Innocentive challenge page Approaches Not of Interest plus R08
+    models: [droplets, kinetics, coupled]
+    notes: "Isolated-droplet microreactor hypothesis. Bulk gelation is a FAIL."
+
+pass_fail_logic:
+  viscosity: "PASS if mu_eff_cP <= 10; MARGINAL if <= 12; else FAIL"
+  transform_time: "PASS if 25 <= t_min <= 75; MARGINAL if 15-85 excluding PASS; else FAIL; UNKNOWN if kinetics not constrained at that T"
+  diameter: "PASS if 70 <= d_um <= 600; MARGINAL if 50-800 excluding PASS; else FAIL"
+  mechanics: "PASS if SF >= 1.25; MARGINAL if 1.0 <= SF < 1.25; FAIL if SF < 1; UNKNOWN if T near/above Tg without high-T data"
+  overall: "FAIL if any hard FAIL; UNKNOWN if any hard UNKNOWN and no FAIL; MARGINAL if any MARGINAL; else PASS. UNKNOWN is never recast as PASS."

@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# External clones (reproduce via scripts/bootstrap_external.sh)
+external/**
+!external/.gitkeep
+!external/README.md
+
+# Large CFD artefacts
+simulations/cfd/**/processor*/
+simulations/cfd/**/*.gz
+simulations/cfd/**/log.*
+results/raw/cfd/**
+!results/raw/cfd/.gitkeep
+!results/raw/cfd/docker_unavailable.txt
+*.OpenFOAM
+*.foam
+
+# Docker / images
+*.tar
+*.tar.gz
+
+# Downloaded copyrighted PDFs (do not redistribute)
+data/raw/pdfs/
+
+# Secrets / local env
+.env
+.env.*
+*.pem
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Windows
+desktop.ini
