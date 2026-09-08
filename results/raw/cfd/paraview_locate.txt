@@ -1,0 +1,3 @@
+paraview=D:\ParaView\ParaView-6.1.1-Windows-Python3.12-msvc2017-AMD64\bin\paraview.exe
+pvpython=D:\ParaView\ParaView-6.1.1-Windows-Python3.12-msvc2017-AMD64\bin\pvpython.exe
+version=paraview version 6.1.1

@@ -1,0 +1,15 @@
+{
+  "generated_utc": "2026-09-08T18:23:10.111291+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "renderer": "ParaView",
+  "file": "01_phaseforge_3d_interface.png",
+  "field": "alpha.water=0.5",
+  "camera": "az32 el22 perspective",
+  "time_s": 0.02,
+  "dataset": "OpenFOAM",
+  "foam": "D:\\Code, 3D, Audio\\Coding\\GitHub\\phaseforge-microparticles\\simulations\\cfd\\phaseforge_channel_3d\\phaseforge_3d.foam",
+  "paraview_script": "paraview_phaseforge_3d.py",
+  "timestep_s": 0.08,
+  "mesh": "320x48x32"
+}

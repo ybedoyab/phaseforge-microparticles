@@ -48,7 +48,7 @@ This is a factual snapshot of the machine used to build the PhaseForge computati
 
 ## CFD implication
 
-Docker Desktop engine is **running** (Server Version 27.4.0). Image `jcmaes/geochemfoam-5.2` (OpenFOAM v2212) solved the official damBreak tutorial, the 2D PhaseForge channel, and a true 3D 491,520-cell `interFoam` channel with spherical droplets. See `docs/cfd_3d_validation.md`.
+Docker Desktop engine is **running** (Server Version 27.4.0). Image `jcmaes/geochemfoam-5.2` (OpenFOAM v2212) solved the official damBreak tutorial, the 2D PhaseForge channel, and a true 3D 491,520-cell `interFoam` channel with spherical droplets. ParaView **6.1.1** post-processed the 3D case. See `docs/cfd_3d_validation.md`.
 
 ## Reproducibility command (after `uv sync --extra dev`)
 

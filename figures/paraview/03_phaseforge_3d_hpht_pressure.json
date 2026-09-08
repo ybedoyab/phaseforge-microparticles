@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-09-08T18:24:09.114229+00:00",
+  "openfoam": "v2212",
+  "image": "jcmaes/geochemfoam-5.2",
+  "renderer": "ParaView",
+  "file": "03_phaseforge_3d_hpht_pressure.png",
+  "field": "p slice + interface",
+  "time_s": 0.06,
+  "dataset": "OpenFOAM",
+  "foam": "D:\\Code, 3D, Audio\\Coding\\GitHub\\phaseforge-microparticles\\simulations\\cfd\\phaseforge_channel_3d_hpht\\phaseforge_3d.foam",
+  "paraview_script": "paraview_phaseforge_3d.py",
+  "timestep_s": 0.08,
+  "mesh": "320x48x32"
+}

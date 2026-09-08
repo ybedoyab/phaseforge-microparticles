@@ -93,6 +93,25 @@ cells:          491520
     assert d["max_nonorthogonality"] == 0.0
 
 
+def test_nominal_checkmesh_log_not_coarse() -> None:
+    from phaseforge.requirements import repo_root
+
+    path = repo_root() / "results/raw/cfd/cfd3d_nominal_checkMesh.log"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8", errors="replace")
+    d = parse_checkmesh(text)
+    assert d["mesh_ok"] is True
+    assert d["n_cells"] == 491520
+    assert d["max_aspect_ratio"] == 1.0
+    assert d["max_nonorthogonality"] == 0.0
+    assert "phaseforge_channel_3d_coarse" not in text
+    assert "Case   : /data/phaseforge_channel_3d" in text
+    assert "Mesh has 3 geometric" in text
+    assert "Mesh has 3 solution" in text
+    assert "Mesh OK." in text
+
+
 def test_3d_case_is_not_empty_patch() -> None:
     from phaseforge.requirements import repo_root
 

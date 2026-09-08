@@ -32,7 +32,17 @@ Nominal structured hex mesh:
 - **8 cells** across the 500 μm droplet diameter
 - Coarse sensitivity mesh: 160 × 24 × 16 = 61,440 cells (4 cells across diameter)
 
-`checkMesh` on the solved coarse case: **Mesh OK**, max aspect ratio 1, non-orthogonality 0, skewness ~0. See `results/raw/cfd/cfd3d_*_checkMesh.log`.
+**Nominal `checkMesh`** (this mesh, case `phaseforge_channel_3d`, log `results/raw/cfd/cfd3d_nominal_checkMesh.log`):
+
+- cells: **491,520** hexahedra
+- bounding box: (0 0 0)–(0.02 0.003 0.002) m
+- 3 geometric directions (1 1 1) and 3 solution directions (1 1 1)
+- max aspect ratio = 1
+- non-orthogonality max = 0 (average 0)
+- max skewness ≈ 3.3×10⁻¹³
+- result: **Mesh OK.**
+
+**Coarse `checkMesh`** (case `phaseforge_channel_3d_coarse`, log `results/raw/cfd/cfd3d_coarse_checkMesh.log`): Mesh OK, 61,440 cells. Do not substitute the coarse log for the nominal mesh.
 
 This is **mesh sensitivity**, not mesh independence.
 
@@ -87,6 +97,21 @@ Channel Reynolds number uses height *H* as the length scale. Weber and capillary
 
 These groups describe incompressible hydrodynamics only.
 
+## ParaView post-processing
+
+- ParaView **6.1.1** (`pvpython` / `paraview.exe` under `D:\ParaView\ParaView-6.1.1-Windows-Python3.12-msvc2017-AMD64\bin`)
+- Dataset opened: `simulations/cfd/phaseforge_channel_3d/phaseforge_3d.foam` via the OpenFOAM reader (`alpha.water`, `U`, `p`, `p_rgh`; `internalMesh` + wall patches). HPHT analogue: `simulations/cfd/phaseforge_channel_3d_hpht/phaseforge_3d.foam`
+- Fields rendered: `alpha.water = 0.5` interface, transparent channel surface, velocity-magnitude slice, pressure slice, streamlines
+- Real XML states: `visualization/phaseforge_3d.pvsm`, `visualization/phaseforge_3d_hpht.pvsm` (ParaView ServerManagerState 6.1.1)
+- Scientific PNG/MP4: `figures/paraview/`
+- GUI screenshot: **automatically captured** from the running ParaView 6.1.1 window (`PrintWindow`) as `figures/software_evidence/paraview_phaseforge_3d_gui.png`. Pipeline Browser shows `phaseforge_channel_3d` at t = 0.08 s.
+
+Reproduction:
+
+```
+uv run python scripts/run_paraview_postprocess.py
+```
+
 ## Limitations
 
 - No chemistry / no ChemGate activation in CFD
@@ -98,6 +123,6 @@ These groups describe incompressible hydrodynamics only.
 
 ## Claim language
 
-A full three-dimensional multiphase OpenFOAM/GeoChemFoam model was solved to examine hydrodynamic transport of four initially spherical dispersed droplets. The model tracks volumetric phase fraction, velocity and pressure fields and is post-processed from VTK (PyVista; ParaView-compatible `.foam`). In the simulated 0.08 s hydrodynamic interval on the nominal 491,520-cell mesh, the four droplets remained discrete (no coalescence), with volume-equivalent diameters approximately 472–485 μm and Wadell sphericity approximately 0.97–0.98. The 150 °C case is a liquid-property analogue and showed the same four discrete droplets with a lower pressure drop (≈2.3 Pa vs ≈4.0 Pa).
+A full three-dimensional multiphase OpenFOAM/GeoChemFoam model was solved to examine hydrodynamic transport of four initially spherical dispersed droplets. The model tracks volumetric phase fraction, velocity and pressure fields and is post-processed in ParaView (OpenFOAM reader; `alpha.water = 0.5` surfaces) as well as from VTK. In the simulated 0.08 s hydrodynamic interval on the nominal 491,520-cell mesh, the four droplets remained discrete (no coalescence), with volume-equivalent diameters approximately 472–485 μm and Wadell sphericity approximately 0.97–0.98. The 150 °C case is a liquid-property analogue and showed the same four discrete droplets with a lower pressure drop (≈2.3 Pa vs ≈4.0 Pa).
 
 Do **not** say the 3D simulation proves PhaseForge works or validates ChemGate chemistry.

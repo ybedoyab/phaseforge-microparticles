@@ -67,7 +67,9 @@ results/raw/cfd/**
 !results/raw/cfd/cfd3d_*_setFields.log
 !results/raw/cfd/cfd3d_*_foamToVTK.log
 !results/raw/cfd/cfd3d_*_decomposePar.log
+!results/raw/cfd/paraview_locate.txt
 !results/raw/cfd/docker_info.txt
+figures/paraview/frames/
 *.OpenFOAM
 *.foam
 !simulations/cfd/phaseforge_channel_3d/phaseforge_3d.foam
